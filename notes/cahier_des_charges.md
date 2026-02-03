@@ -16,12 +16,12 @@
 * Parties prévues
     * Test de lancement : faire clignoter une LED
     * Les capteurs
-        * Thermomètre : afficher valeur
-        * Accéléromètre : barre d'accélération
-        * Pression : afficher valeur
-        * Humidité : afficher barre
-        * GPS : faire déplacer un point dans le carré des LEDs
-    * Communication LoRa
+        * Thermomètre (micro:bit) : afficher valeur
+        * Accéléromètre (micro:bit) : barre d'accélération
+        * Pression (SEED) : afficher valeur
+        * Humidité (SEED) : afficher barre
+        * GPS (à ajouter) : faire déplacer un point dans le carré des LEDs
+    * Communication LoRa (à ajouter)
         * Cours : utilisation limitée
         * Emetteur & Récepteur
         * Test d'envoi (message/mélodie codé en dur)
