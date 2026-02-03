@@ -44,7 +44,7 @@
 
 ## XA1110 - GPS
 
-### Hardware Overview
+### Vue générale du matériel
 
 |    Characteristic   |                                               Range                                               |
 |:-------------------:|:-------------------------------------------------------------------------------------------------:|
@@ -76,6 +76,31 @@
 | RX   | UART receiver; to receive commands                                                    | In        |
 | TX   | UART transmitter; outputs GPS information                                             | Out       |
 
-### Use
+### Utilisation
 
-[See arduino library github : https://github.com/sparkfun/SparkFun_I2C_GPS_Arduino_Library/tree/master](https://github.com/sparkfun/SparkFun_I2C_GPS_Arduino_Library/tree/master).
+[Voir arduino library sur github : https://github.com/sparkfun/SparkFun_I2C_GPS_Arduino_Library/tree/master](https://github.com/sparkfun/SparkFun_I2C_GPS_Arduino_Library/tree/master).
+
+## Wio-SX1262 (LoRa)
+
+### Pins
+
+| Number |  Name | Type | Description                                                                                                        |
+|:------:|:-----:|:----:|--------------------------------------------------------------------------------------------------------------------|
+| 1      | RF_SW | I    | External IO control internal gate RF switch. Logic high level means enable receiver mode, other time is low level. |
+| 2      | MISO  | I/O  | SPI_MISO                                                                                                           |
+| 3      | MOSI  | I/O  | SPI_MOSI                                                                                                           |
+| 4      | SCK   | I/O  | SPI_SCK                                                                                                            |
+| 5      | NRST  | I    | Reset signal, active low                                                                                           |
+| 6      | NSS   | I/O  | SPI_NSS                                                                                                            |
+| 7      | GND   | -    | Ground                                                                                                             |
+| 8      | VCC   | I    | Supply voltage for the module                                                                                      |
+| 9      | ANT   | I/O  | RF input/output, (only Wio-SX1262-N) [1]                                                                           |
+| 10     | GND   | -    | Ground                                                                                                             |
+| 11     | Busy  | O    | Busy indicator of IC SX1262                                                                                        |
+| 12     | DIO1  | I/O  | Multi-purpose digital IO, DIO1 of IC SX1262                                                                        |
+
+\[1\] While model Wio-SX1262 use IPEX RF interface directly
+
+### Utilisation
+
+[Voir doc en ligne : https://wiki.seeedstudio.com/wio_sx1262/](https://wiki.seeedstudio.com/wio_sx1262/).
