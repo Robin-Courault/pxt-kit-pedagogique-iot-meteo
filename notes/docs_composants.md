@@ -42,4 +42,40 @@
 
 *: These names follow the schematic’s naming convention, labeled from the interface’s perspective, not the target MCU’s. So, UART_INT_TX corresponds to the MCU’s RX pin, and UART_INT_RX to the MCU’s TX pin.
 
+## XA1110 - GPS
 
+### Hardware Overview
+
+|    Characteristic   |                                               Range                                               |
+|:-------------------:|:-------------------------------------------------------------------------------------------------:|
+| Operating Voltage   | 3.3V: Regulated to 1.8V - 3.6V                                                                    |
+| Current             | 25 mA (typical)                                                                                   |
+| Hot/Warm/Cold Start | 1/5/15 seconds                                                                                    |
+| Update Rate         | 1 Hz (default), 0.1-10 Hz                                                                         |
+| I2C Interface       | 100kHz & 400kHz (3.3V)                                                                            |
+| I2C Address         | 0x10                                                                                              |
+| UART                | 9600 bps (default), 4800-115200 bps (3.3V)                                                        |
+| Position Accuracy   | <3.0m, <2.5m with SBAS enabled                                                                    |
+| Satellites          | 99 during search, 33 during tracking                                                              |
+| Sensitivity         | -148dBm Acquisition, -165dBm Tracking                                                             |
+| Max Altitude        | 80km (the mesosphere) using the example configuration sketch to enable high-altitude balloon mode |
+| RTC Battery         | 5.5mAh, enables warm start for 15 days without power                                              |
+
+### Pins
+
+|  Pin |                                      Description                                      | Direction |
+|:----:|:-------------------------------------------------------------------------------------:|:---------:|
+| GND  | Ground                                                                                | In        |
+| 3.3V | Power                                                                                 | In        |
+| SDA  | Data                                                                                  | In        |
+| SCL  | Clock                                                                                 | In        |
+| INT  | Interrupt, goes low when NMEA data is ready, after packet is read, the pin pulls high | Out       |
+| Wake | Wake up                                                                               | In        |
+| RST  | Pulling low will reset the module                                                     | In        |
+| PPS  | Provides one pulse-per-second signal                                                  | Out       |
+| RX   | UART receiver; to receive commands                                                    | In        |
+| TX   | UART transmitter; outputs GPS information                                             | Out       |
+
+### Use
+
+[See arduino library github : https://github.com/sparkfun/SparkFun_I2C_GPS_Arduino_Library/tree/master](https://github.com/sparkfun/SparkFun_I2C_GPS_Arduino_Library/tree/master).
