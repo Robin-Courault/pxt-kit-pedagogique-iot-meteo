@@ -17,4 +17,13 @@
 
 ## 03/02/2026
 
-TODO
+- Installation en local de MakeCode et des outils fournis par Microsoft (pxt)
+- SH : Découverte TypeScript
+- SH : Recherche de documentation sur les Pins de la Micro:bit
+- RC : Recherche de documentation sur la puce GPS
+- RC : Recherche de documentation sur la puce LoRa
+
+## 09/02/2026
+
+- Début écriture du sujet
+- Début de conception des blocs d'interface à réaliser pour chaque capteur
