@@ -1,9 +1,5 @@
 # Cahier des charges  
 
-* Seront fournis :
-    * Sujet (format MarkDown)
-    * Code source (TypeScript)
-
 ## Contraintes du sujet
 
 * Indépendant : le sujet se suffit à lui-même
