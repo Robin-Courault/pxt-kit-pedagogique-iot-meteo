@@ -2,6 +2,8 @@
 
 ## micro:bit
 
+### Première Représentation des Pins
+
 [Schémas de la microbit](https://tech.microbit.org/hardware/schematic/)
 
 | GPIO on nRF52833 |      Allocation     | Interface (KL27 / nRF52) | Edge Connector name |
@@ -41,6 +43,10 @@
 | P0.30            | COL5                | N                        | P10                 |
 
 *: These names follow the schematic’s naming convention, labeled from the interface’s perspective, not the target MCU’s. So, UART_INT_TX corresponds to the MCU’s RX pin, and UART_INT_RX to the MCU’s TX pin.
+
+### Seconde Représentation
+
+![Schéma Pins Micro:bit v2](https://tech.microbit.org/docs/hardware/assets/edge-connector-2.svg)
 
 ## XA1110 - GPS
 
