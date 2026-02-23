@@ -1,9 +1,15 @@
 # Kit pédagogique SEED micro:bit
 
 
+## Intro
+
+
 ## Test de lancement
 
-1) faire clignoter une LED
+**Faire clignoter une LED**  
+Pour s'assurer que tout est bien installé, commençons par un test.
+Fais clignoter la LED. 
+Elle doit s'allumer 500ms et s'éteindre 500ms indéfiniment.
 
 
 
@@ -11,45 +17,45 @@
 
 ### Thermomètre (micro:bit) 
 
-afficher valeur
+**Afficher valeur**
+1) Affiche la température.  
+2) Est-ce que la température affichée se met à jour ?
+Si ce n'est pas le cas, fais en sorte que l'affichage change lorsque la carte se réchauffe ou se refroidit. 
+Tu peux tester si ça marche en soufflant dessus, en la mettant dehors, en la rapprochant d'un radiateur, etc.  
+
+Attention : toucher les parties métalliques de la carte pendant son fonctionnement peut l'abîmer ! 
+De plus, la carte n'aime pas l'eau...
 
 <!-- ### Accéléromètre (micro:bit) -->
 <!---->
 <!-- 1) fonction d'affichage de barre d'accélération -->
 <!-- 2) affichage de l'accélération -->
 
+
 ### Pression (SEED)
 
-afficher valeur
-[] pressure() bloc de récupération de la pression
-[] setPressureRange(range) bloc de réglage de la range ?
+**Afficher valeur**
+Maintenant, fais la même chose avec la pression.
+TODO : manipuler la pressure range.
+
 
 ### Humidité (SEED)
 
 1) fonction d'affichage de barre
 2) afficher barre d'humidité
-[] humidity() bloc de récupération de l'humidité
-[] setHumidityRange(range) ?
-[] on humidityChange/humidityUp/humidityDown ?
+
 
 ### GPS (à ajouter)
 
 1) faire une fonction d'affichage de coordonnées
-[] objet de coordonnées
-[] getPosition()
-[] toRelative(coord)
-[] setOrigin(coord)
-[] onMove -> quand la position relative change d'integer
-
 
 
 ## Communication LoRa (à ajouter)
 
 * Cours : utilisation limitée
-* Emetteur & Récepteur
-* Test d'envoi (message/mélodie codé en dur)
+* Emission et réception de messages
+* Ajout d'un header pour trier la réception
 * Envoi de différentes données (nécessitant test côté récepteur)
-
 
 
 ## Ballon météorologique : envoi de toutes les données au format (APRS ?)
