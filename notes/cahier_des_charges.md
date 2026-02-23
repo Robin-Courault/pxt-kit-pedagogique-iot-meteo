@@ -28,3 +28,37 @@
 
 * Compatible avec l'interface blocks de Microsoft pour Micro:bit
     * Blocs abstrayant l'utilisation des capteurs de la carte supplémentaire
+
+## Blocs à implémenter
+
+* Pression
+[ ] pressure() bloc de récupération de la pression
+[ ] setPressureRange(range) bloc de réglage de la range ?
+
+* Humidité
+[ ] humidity() bloc de récupération de l'humidité
+[ ] setHumidityRange(range) ?
+[ ] on humidityChange/humidityUp/humidityDown ?
+
+* GPS
+[ ] objet location/localisation
+[ ] getLocation
+[ ] objet map/carte
+[ ] createMap(anchor/ancrage: location, [centre, coin haut-gauche...], cellSize : number, [m, km])
+[ ] map.setAnchor(location)
+[ ] map.moveAnchor(nb cases vers le haut, nb cases vers la droite)
+[ ] map.setCellSize(number, unité)
+[ ] map.addPoint()
+[ ] map.print()
+[ ] map.clearMap()
+
+([ ] map.onMove -> quand la position relative change d'integer)
+
+* LoRa
+[ ] sendMessage(texte)
+[ ] sendMessage(texte, fréquence)
+[ ] receiveMessage()
+[ ] receiveMessage(fréquence)
+
+[ ] onMessageReceived
+
