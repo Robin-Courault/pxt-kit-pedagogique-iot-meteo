@@ -32,7 +32,10 @@
 
 - Terminé la spécification des blocs pour chaque capteur
 - SH : Continué l'écriture du sujet
-- RC : Début de l'implémentation d'un squelette de code pour les blocs
+- RC : Début de l'implémentation d'un squelette de code pour les blocs (Pression et GPS)
 
 ## 24/02/2026
 
+- Tentative de ré-organisation du git, abandonnée
+- RC : Continué l'écriture du sujet
+- SH : Continué l'implémentation du squelette de code (Pression et GPS)
