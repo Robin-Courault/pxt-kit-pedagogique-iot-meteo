@@ -32,8 +32,8 @@
 ## Blocs à implémenter
 
 * Pression
-[ ] pressure() bloc de récupération de la pression
-[ ] setPressureRange(range) bloc de réglage de la range ?
+[x] pressure() bloc de récupération de la pression
+[x] setPressureRange(range) bloc de réglage de la range ?
 
 * Humidité
 [ ] humidity() bloc de récupération de l'humidité
@@ -41,8 +41,9 @@
 [ ] on humidityChange/humidityUp/humidityDown ?
 
 * GPS
-[ ] objet location/localisation
-[ ] getLocation
+[x] objet location/localisation
+[x] getLocation
+[x] location.getLatitude/Longitude
 [ ] objet map/carte
 [ ] createMap(anchor/ancrage: location, [centre, coin haut-gauche...], cellSize : number, [m, km])
 [ ] map.setAnchor(location)
