@@ -26,4 +26,13 @@
 ## 09/02/2026
 
 - Début écriture du sujet
-- Début de conception des blocs d'interface à réaliser pour chaque capteur
+- Début de la spécification des blocs d'interface à réaliser pour chaque capteur
+
+## 23/02/2026
+
+- Terminé la spécification des blocs pour chaque capteur
+- SH : Continué l'écriture du sujet
+- RC : Début de l'implémentation d'un squelette de code pour les blocs
+
+## 24/02/2026
+
