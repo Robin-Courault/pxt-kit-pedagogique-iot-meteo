@@ -2,15 +2,13 @@
  * Organize your blocks in groups
  */
 
-//% color="#AA278D"
+//% color="#FFB53D" icon="\uf2ce" weight=110
 //% groups="['Pressure','GPS','Humidity','LoRa']"
 namespace inputSeed {
-    export enum absLocation {
-        //% block="Longitude" enumval=0
-        Abs_Location_Lon,
-        //% block="Latitude" enumval=1
-        Abs_Location_Lat
-    }
+    /**
+     * ===== Blocks de pression =====
+     */
+    
 
     //% block="set the max pressure"
     //% group="Pressure"
@@ -23,6 +21,17 @@ namespace inputSeed {
     export function pressure(): number {
         // TODO : retrieve pressure
         return 0;
+    }
+
+    /**
+     * ===== Blocks de localisation =====
+     */
+
+    export enum locationType {
+        //% block="Longitude"
+        locationLon,
+        //% block="Latitude"
+        locationLat
     }
 
     /**
@@ -53,10 +62,10 @@ namespace inputSeed {
         //% block="get $typeVal of $this"
         //% group="GPS"
         //% this.defl=location
-        getLocationElement(typeVal: absLocation): number {
-            if (typeVal === absLocation.Abs_Location_Lat) {
+        getLocationElement(typeVal: locationType): number {
+            if (typeVal === locationType.locationLat) {
                 return this.lat;
-            } else if (typeVal === absLocation.Abs_Location_Lon) {
+            } else if (typeVal === locationType.locationLon) {
                 return this.lon;
             } else {
                 return NaN;
@@ -64,3 +73,46 @@ namespace inputSeed {
         }
     }
 }
+
+//% color="#AA278D" icon="\uf279" weight=109
+/* //% groups="['Pressure','GPS','Humidity','LoRa']" */
+namespace Map {
+
+    export enum anchorPositionType {
+        //% block="Centre"
+        anchorCenter,
+        //% block="Coin haut gauche"
+        anchorTopLeft,
+        //% block="Coin haut droit"
+        anchorTopRight,
+        //% block="Coin bas gauche"
+        anchorBottomLeft,
+        //% block="Coin bas droit"
+        anchorBottomRight
+    }
+
+    export enum sizeUnitType {
+        //% block="m"
+        m,
+        //% block="km"
+        km
+    }
+
+    export class Map {
+        anchor : Location;
+        // TODO
+
+        //% block="create Map with $anchor on $position and cells measuring $cellSize $sizeUnit"
+        export constructor(
+            anchor : Location, 
+            position : anchorPositionType,
+            cellSize : number,
+            sizeUnit : sizeUnitType
+            ) {
+            this.anchor = anchor;
+            // TODO : 1° = 111111m
+        }
+    }
+
+}
+
