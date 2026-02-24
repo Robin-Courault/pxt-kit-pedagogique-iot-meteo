@@ -2,6 +2,16 @@
 
 
 ## Intro
+Connais-tu les ballons-sondes ?  
+Ces ballons permettent de faire des mesures dans l'atmosphère.
+Nous nous intéressons aux ballons météorologiques, dont la nasselle est remplie de capteurs.
+Ils s'élèvent dans le ciel, à au moins 35km du sol, où ils peuvent mesurer la température, l'humidité, la vitesse du vent, etc.
+Grâce à eux, nous pouvons prédire la météo !
+
+Dans ce projet, tu vas implémenter une carte capable de mesurer des données et de les envoyer à une antenne.
+Nous allons commencer par faire fonctionner chaque capteur indépendamment.
+Une fois que tu sauras utiliser tous les capteurs, tu pourras implémenter l'envoi des données mesurées depuis un ballon.
+
 
 
 ## Test de lancement
@@ -10,7 +20,6 @@
 Pour s'assurer que tout est bien installé, commençons par un test.
 Fais clignoter la LED. 
 Elle doit s'allumer 500ms et s'éteindre 500ms indéfiniment.
-
 
 
 ## Les capteurs
@@ -41,8 +50,10 @@ TODO : manipuler la pressure range.
 
 ### Humidité (SEED)
 
-1) fonction d'affichage de barre
-2) afficher barre d'humidité
+1) Fonction d'affichage de barre
+
+
+2) Afficher la barre d'humidité
 
 
 ### GPS (à ajouter)
