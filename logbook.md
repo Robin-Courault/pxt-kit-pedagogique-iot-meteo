@@ -38,4 +38,26 @@
 
 - Tentative de ré-organisation du git, abandonnée
 - RC : Continué l'écriture du sujet
+    - Ajout de redirections internes
+    - Mise en forme
+    - Ajout de corrections (test de lancement, thermomètre)
+    - Ajout de cours (thermomètre, pression)
 - SH : Continué l'implémentation du squelette de code (Pression et GPS)
+
+## 02/03/2026
+
+- Prise de contact avec l'enseignante
+    - Ecriture du mail & mise au propre du cahier des charges pour l'envoi
+- RC : Continué l'écriture du sujet
+    - Cours (pression, température)
+    - Mise en forme
+- SH : Continué l'implémentation du code (Map)
+    - Ajout du squelette de toutes les méthodes de Map
+    - Implémentation de la conversion coordonnées (long/lat) vers coordonnées 2D
+
+## 03/03/2026
+
+- RC : Continué l'écriture du sujet
+    - Capteur d'humidité (cours, consigne)
+    - Mise en forme
+- SH : Corrigé les erreurs de compilation (Map)
