@@ -117,53 +117,145 @@ namespace map {
         anchorPosition : anchorPositionType;
         cellSize_m : number; // in meters
         points : Point2D[];
+        printSize : number = 5;
 
-        //% block="create Map with $anchor on $position and cells measuring $cellSize $sizeUnit"
+        //% block="create Map center on current location and cells measuring $cellSize $sizeUnit"
         constructor(
-            anchor : inputSeed.Location, 
-            position : anchorPositionType,
             cellSize : number,
             sizeUnit : sizeUnitType
             ) {
+                this.anchor_m = (new inputSeed.Location()).toPoint2D();
+                this.anchorPosition = anchorPositionType.anchorCenter;
+                if (sizeUnit == sizeUnitType.m) {
+                    // sets the size in meters
+                    this.cellSize_m = cellSize;
+                } else {
+                    // converts the size to meters
+                    this.cellSize_m = cellSize*1000;
+                }
+                this.points = [];
+        }
+
+        //% block="Set $anchor as anchor on $position for $this
+        //% this.defl=map
+        setAnchor(anchor : inputSeed.Location, position : anchorPositionType) {
             this.anchor_m = anchor.toPoint2D();
-            this.anchorPosition = position;
-            if (sizeUnit == sizeUnitType.m) {
-                // sets the size in meters
-                this.cellSize_m = cellSize;
-            } else {
-                // converts the size to meters
-                this.cellSize_m = cellSize*1000;
+        }
+
+        //% block="Move $anchor of $this of $nCellsAbscisse cellules in x and $nCellsOrdonnee cellules in y
+        //% this.defl=map
+        moveAnchor(nCellsAbscisse : number, nCellsOrdonnee : number) {
+            this.anchor_m.x += nCellsAbscisse*this.cellSize_m;
+            this.anchor_m.y += nCellsOrdonnee*this.cellSize_m;
+        }
+
+        //% block="Set cell size of $this to $cellSize $sizeUnit
+        //% this.defl=map
+        setCellSize(cellSize : number, sizeUnit : sizeUnitType) {
+            this.cellSize_m = (sizeUnit == sizeUnitType.m) ? cellSize : cellSize*1000;
+        }
+
+        //% block="Add $location to $this
+        //% this.defl=map
+        addLocation(location : inputSeed.Location) {
+            this.points.push(location.toPoint2D());
+        }
+
+        //% block="Add $location to $this
+        //% this.defl=map
+        print() {
+            let lines : boolean[][] = [];
+            for (let i = 0; i < this.printSize; i++) {
+                lines.push([]);
+                for (let j = 0; j < this.printSize; j++) {
+                    lines[i].push(false);
+                }
             }
+            let screenTop : number;
+            let screenLeft : number;
+
+            switch (this.anchorPosition) {
+                case anchorPositionType.anchorTopLeft :
+                    screenTop = this.anchor_m.y + (this.cellSize_m/2);
+                    screenLeft = this.anchor_m.x - (this.cellSize_m/2);
+                    lines[0][0] = true;
+                    lines = this.getCellsOfPoints(screenTop,screenLeft,lines);
+                    break;
+                case anchorPositionType.anchorTopRight :
+                    screenTop = this.anchor_m.y + (this.cellSize_m/2);
+                    screenLeft = this.anchor_m.x - (this.cellSize_m*this.printSize + this.cellSize_m/2);
+                    lines[0][this.printSize-1] = true; // last char
+                    lines = this.getCellsOfPoints(screenTop,screenLeft,lines);
+                    break;
+                case anchorPositionType.anchorCenter :
+                    screenTop = this.anchor_m.y + (this.cellSize_m*this.printSize/2 + this.cellSize_m/2);
+                    screenLeft = this.anchor_m.x - (this.cellSize_m*this.printSize/2 + this.cellSize_m/2);
+                    lines[this.printSize/2][this.printSize/2] = true; // mid char
+                    lines = this.getCellsOfPoints(screenTop,screenLeft,lines);
+                    break;
+                case anchorPositionType.anchorBottomLeft :
+                    screenTop = this.anchor_m.y + (this.cellSize_m*this.printSize + this.cellSize_m/2);
+                    screenLeft = this.anchor_m.x - (this.cellSize_m/2);
+                    lines[this.printSize-1][0] = true;
+                    lines = this.getCellsOfPoints(screenTop,screenLeft,lines);
+                    break;
+                case anchorPositionType.anchorBottomRight :
+                    screenTop = this.anchor_m.y + (this.cellSize_m*this.printSize + this.cellSize_m/2);
+                    screenLeft = this.anchor_m.x - (this.cellSize_m*this.printSize + this.cellSize_m/2);
+                    lines[this.printSize-1][this.printSize-1] = true; // last char
+                    lines = this.getCellsOfPoints(screenTop,screenLeft,lines);
+                    break;
+            }
+            
+            basic.showLeds(this.convertCellsInString(lines));
+        }
+
+        //% block="Remove all locations in $this
+        //% this.defl=map
+        clear() {
             this.points = [];
         }
 
-        setAnchor(anchor : inputSeed.Location, position : anchorPositionType) {
-            this.anchor_m = anchor.toPoint2D();
+        getCellsOfPoints(limitTop : number, limitLeft : number, grid : boolean[][]) : boolean[][] {
+            this.points.forEach(p => {
+                if (p.x >= limitLeft && p.x < limitLeft + this.printSize*this.cellSize_m 
+                    && p.y <= limitTop && p.y > limitTop - this.printSize*this.cellSize_m) {
+                    // parcours de toutes les lignes de la grille
+                    for (let i = 1; i <= this.printSize; i++) {
+                        let j : number;
+                        // parcours de toutes les colonnes de la grille
+                        for (j = 1; j <= this.printSize; j++) {
+                            // case where cell is already true
+                            if (grid[i-1][j-1]) {
+                                break;
+                            }
+                            // case where p is in [i-1][j-1] cell
+                            else if (p.x < limitLeft + j*this.cellSize_m && p.y > limitTop - i*this.cellSize_m) {
+                                grid[i-1][j-1] = true;
+                                break;
+                            }
+                        }
 
+                        // case where break in prev (j) loop, p can't be in two cells
+                        if (grid[i-1][j-1]) {
+                            break;
+                        }
+                    }
+                }
+            });
+
+            return grid;
         }
 
-        moveAnchor() {
-
-        }
-
-        setCellSize() {
-
-        }
-
-        addLocation() {
-             
-        }
-
-        print() {
-
-        }
-
-        clear() {
-
-        }
-
-        onMove() {
-
+        convertCellsInString(grid : boolean[][]) : string {
+            let stringGrid = "";
+            grid.forEach(l => {
+                l.forEach(c => {
+                    stringGrid = c ? stringGrid.concat('#') : stringGrid.concat('.');
+                })
+                stringGrid = stringGrid.concat("\n");
+            });
+            return stringGrid;
         }
     }
 
@@ -178,7 +270,3 @@ namespace map {
     }
 
 }
-
-const loc = new inputSeed.Location();
-console.log(loc.getLocationElement(inputSeed.locationType.locationLon));
-
