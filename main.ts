@@ -12,7 +12,6 @@ namespace inputSeed {
     /**
      * ===== Blocks de pression =====
      */
-    
 
     //% block="set the max pressure"
     //% group="Pressure"
@@ -78,7 +77,7 @@ namespace inputSeed {
 
         //Formula by Alex Punnen : https://gis.stackexchange.com/a/488625
         // Returns the equivalent flat coordinates (in 2D meters)
-        toPoint2D(): Map.Point2D {
+        toPoint2D(): map.Point2D {
             const lat_rad: number = degToRad(this.lat_deg);
 
             const lat_m: number = (111132.92 - 559.82 * Math.cos(2 * lat_rad)
@@ -86,15 +85,13 @@ namespace inputSeed {
             const long_m: number = (111412.84 * Math.cos(lat_rad) - 93.5 * Math.cos(3*lat_rad)
                 + 0.118 * Math.cos(5*lat_rad));
 
-            return new Map.Point2D(long_m, lat_m);
+            return new map.Point2D(long_m, lat_m);
         }
     }
 }
 
 //% color="#AA278D" icon="\uf279" weight=109
-/* //% groups="['Pressure','GPS','Humidity','LoRa']" */
-namespace Map {
-
+namespace map {
     export enum anchorPositionType {
         //% block="Centre"
         anchorCenter,
@@ -123,7 +120,7 @@ namespace Map {
 
         //% block="create Map with $anchor on $position and cells measuring $cellSize $sizeUnit"
         constructor(
-            anchor : Location, 
+            anchor : inputSeed.Location, 
             position : anchorPositionType,
             cellSize : number,
             sizeUnit : sizeUnitType
@@ -140,7 +137,7 @@ namespace Map {
             this.points = [];
         }
 
-        setAnchor(anchor : Location, position : anchorPositionType) {
+        setAnchor(anchor : inputSeed.Location, position : anchorPositionType) {
             this.anchor_m = anchor.toPoint2D();
 
         }
@@ -174,7 +171,7 @@ namespace Map {
         x : number;
         y : number;
         
-        constructor(x, y) {
+        constructor(x : number, y : number) {
             this.x = x;
             this.y = y;
         }
@@ -182,6 +179,6 @@ namespace Map {
 
 }
 
-const loc = new Location();
-console.log(loc.getLocationElement(LocationType.locationLon));
+const loc = new inputSeed.Location();
+console.log(loc.getLocationElement(inputSeed.locationType.locationLon));
 
