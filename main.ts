@@ -7,7 +7,7 @@ function degToRad(degrees: number) : number {
 }
 
 //% color="#FFB53D" icon="\uf2ce" weight=110
-//% groups="['Pressure','GPS','Humidity','LoRa']"
+//% groups="['Pressure','GPS','LoRa']"
 namespace inputSeed {
     /**
      * ===== Blocks de pression =====
@@ -45,9 +45,9 @@ namespace inputSeed {
     //% blockSetVariable=location
     //% group="GPS"
     export function getLocation(): Location {
-        let loc = new Location();
-        // TODO : fill loc when we can retrieve GPS coords
-        return loc;
+        let location = new Location();
+        // TODO : fill location when we can retrieve GPS coords
+        return location;
     }
 
     export class Location {
@@ -112,6 +112,15 @@ namespace map {
         km
     }
 
+    //% block="new Map centered on current location || and cells measuring $cellSize $sizeUnit"
+    //% blockSetVariable=map
+    //% inlineInputMode=external
+    //% expandableArgumentMode="toggle"
+    //% cellSize.defl=1
+    export function newMap(cellSize : number, sizeUnit : sizeUnitType) {
+        return new Map(cellSize, sizeUnit);
+    }
+
     export class Map {
         anchor_m : Point2D; // in meters
         anchorPosition : anchorPositionType;
@@ -119,7 +128,6 @@ namespace map {
         points : Point2D[];
         printSize : number = 5;
 
-        //% block="create Map center on current location and cells measuring $cellSize $sizeUnit"
         constructor(
             cellSize : number,
             sizeUnit : sizeUnitType
@@ -140,6 +148,7 @@ namespace map {
         //% this.defl=map
         setAnchor(anchor : inputSeed.Location, position : anchorPositionType) {
             this.anchor_m = anchor.toPoint2D();
+            this.anchorPosition = position;
         }
 
         //% block="Move $anchor of $this of $nCellsAbscisse cellules in x and $nCellsOrdonnee cellules in y"
@@ -161,7 +170,7 @@ namespace map {
             this.points.push(location.toPoint2D());
         }
 
-        //% block="Add $location to $this"
+        //% block="print $this"
         //% this.defl=map
         print() {
             let lines : boolean[][] = [];
@@ -268,5 +277,4 @@ namespace map {
             this.y = y;
         }
     }
-
 }
