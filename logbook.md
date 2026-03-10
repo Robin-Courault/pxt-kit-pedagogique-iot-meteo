@@ -61,3 +61,22 @@
     - Capteur d'humidité (cours, consigne)
     - Mise en forme
 - SH : Corrigé les erreurs de compilation (Map)
+
+## 09/03/2026
+
+- RC : Code
+    - Ajout des méthodes/blocs manquant(e)s pour le GPS
+    - Corrections sur les namespaces
+- SH : C++ & MakeCode
+    - Recherches sur comment utiliser du C++ avec MakeCode
+    - Tests de fonctionnement
+
+## 10/03/2026
+
+- RC : Jira refactoring
+- RC : Code
+    - Finalisation du squelette/code pour les blocs GPS & Pression
+    - Refactoring des blocs (déplacements, modifications des textes, purge de l'inutile)
+- SH : Recherches sur le fonctionnement du C++ avec MakeCode
+    - Réussite sur la compilation
+    - Nouvelles recherches sur les drivers pour transférer des drivers Arduino vers de la Micro:Bit
