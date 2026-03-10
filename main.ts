@@ -136,32 +136,32 @@ namespace map {
                 this.points = [];
         }
 
-        //% block="Set $anchor as anchor on $position for $this
+        //% block="Set $anchor as anchor on $position for $this"
         //% this.defl=map
         setAnchor(anchor : inputSeed.Location, position : anchorPositionType) {
             this.anchor_m = anchor.toPoint2D();
         }
 
-        //% block="Move $anchor of $this of $nCellsAbscisse cellules in x and $nCellsOrdonnee cellules in y
+        //% block="Move $anchor of $this of $nCellsAbscisse cellules in x and $nCellsOrdonnee cellules in y"
         //% this.defl=map
         moveAnchor(nCellsAbscisse : number, nCellsOrdonnee : number) {
             this.anchor_m.x += nCellsAbscisse*this.cellSize_m;
             this.anchor_m.y += nCellsOrdonnee*this.cellSize_m;
         }
 
-        //% block="Set cell size of $this to $cellSize $sizeUnit
+        //% block="Set cell size of $this to $cellSize $sizeUnit"
         //% this.defl=map
         setCellSize(cellSize : number, sizeUnit : sizeUnitType) {
             this.cellSize_m = (sizeUnit == sizeUnitType.m) ? cellSize : cellSize*1000;
         }
 
-        //% block="Add $location to $this
+        //% block="Add $location to $this"
         //% this.defl=map
         addLocation(location : inputSeed.Location) {
             this.points.push(location.toPoint2D());
         }
 
-        //% block="Add $location to $this
+        //% block="Add $location to $this"
         //% this.defl=map
         print() {
             let lines : boolean[][] = [];
@@ -210,7 +210,7 @@ namespace map {
             basic.showLeds(this.convertCellsInString(lines));
         }
 
-        //% block="Remove all locations in $this
+        //% block="Remove all locations in $this"
         //% this.defl=map
         clear() {
             this.points = [];
