@@ -86,6 +86,12 @@
 
 [Voir arduino library sur github : https://github.com/sparkfun/SparkFun_I2C_GPS_Arduino_Library/tree/master](https://github.com/sparkfun/SparkFun_I2C_GPS_Arduino_Library/tree/master).
 
+### Configuration
+
+Envoi de paquets NMEA : doc_com_GPS.pdf p.9
+
+
+
 ## Wio-SX1262 (LoRa)
 
 ### Pins
@@ -110,3 +116,4 @@
 ### Utilisation
 
 [Voir doc en ligne : https://wiki.seeedstudio.com/wio_sx1262/](https://wiki.seeedstudio.com/wio_sx1262/).
+
