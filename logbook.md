@@ -30,12 +30,14 @@
 
 ## 23/02/2026
 
+- Obtention des cartes Micro:bit
 - Terminé la spécification des blocs pour chaque capteur
 - SH : Continué l'écriture du sujet
 - RC : Début de l'implémentation d'un squelette de code pour les blocs (Pression et GPS)
 
 ## 24/02/2026
 
+- Obtention de la carte SEED
 - Tentative de ré-organisation du git, abandonnée
 - RC : Continué l'écriture du sujet
     - Ajout de redirections internes
@@ -80,3 +82,21 @@
 - SH : Recherches sur le fonctionnement du C++ avec MakeCode
     - Réussite sur la compilation
     - Nouvelles recherches sur les drivers pour transférer des drivers Arduino vers de la Micro:Bit
+
+## 16/03/2026
+
+- Recherches sur le fonctionnement de l'I2C avec les librairies Micro:bit
+- Mise au point avec les collègues IESE
+- Réunion de gestion de projet
+- RC : implémentation d'une lecture continue des données GPS brutes
+
+## 17/03/2026
+
+
+## 23/02/2026
+
+
+## 24/03/2026
+
+
+
