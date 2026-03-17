@@ -92,6 +92,14 @@
 
 ## 17/03/2026
 
+- SH : Compte rendu de la réunion de la veille
+- SH : Réponse mail à l'enseignante
+- SH : Code
+    - Test et correction de la méthode toPoint2D
+- SH : Documentation
+    - Recherche paramétrage de la fréquence d'envoi du GPS
+- RC : Code
+    - Parsing des données GPS
 
 ## 23/02/2026
 
