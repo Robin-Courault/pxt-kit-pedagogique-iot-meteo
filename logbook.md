@@ -103,6 +103,9 @@
 
 ## 23/02/2026
 
+- SH : Diagramme de Gantt du projet
+- RC : Code GPS
+    - Correction configuration du capteur GPS
 
 ## 24/03/2026
 
