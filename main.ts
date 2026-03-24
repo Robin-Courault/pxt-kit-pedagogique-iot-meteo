@@ -37,6 +37,139 @@ namespace inputSeed {
         locationLat
     }
 
+    const GPS_ADDRESS = 0x10;
+    let trameBuffer : string = "";
+    /**
+     * Lit 32 octets depuis le GPS via I2C
+     */
+    function readRawData(): string {
+        let result = "";
+        try {
+            // Lecture des octets depuis le module
+            let data = pins.i2cReadBuffer(GPS_ADDRESS, 32, false);
+
+            for (let i = 0; i < data.length; i++) {
+                let charCode = data.getNumber(NumberFormat.UInt8LE, i);
+                // Filtrer les caractères valides (ASCII imprimable)
+                if (charCode >= 32 && charCode <= 126) {
+                    result += String.fromCharCode(charCode);
+                } 
+                // CR + LF
+                else if (charCode === 13 || charCode === 10) {
+                    result += "\n";
+                }
+            }
+        } catch (e) {
+            result = "";
+        }
+        return result;
+    }
+
+    export function getAllTrames(): string[] {
+        let raw = readRawData();
+        if (raw.length === 0) return [];
+
+        trameBuffer += raw;
+
+        // Traitement des phrases complètes
+        let lines = trameBuffer.split("\n");
+
+        // Garder la dernière ligne incomplète dans le buffer
+        trameBuffer = lines[lines.length - 1];
+
+        return lines;
+    }
+
+    const GGA_LAT_POS = 2;
+    const GGA_LON_POS = 4;
+    const GGA_FIX_GPS_POS = 6;
+    /**
+     * @param trame trame GGA découpée sur les ',' et sans la partie checksum
+     * @returns null si trame vide, ou si trame n'est pas de type GGA, ou si pas de fix GPS, sinon Location avec coordonnées de la trame lue
+     */
+    export function parseTrameGGA(trame : string[]): Location | null {
+        // GP = GPS | GN = GPS + GLONASS
+        if (trame[0] == "$GPGGA" || trame[0] == "$GNGGA") {
+            basic.showNumber(8);
+            basic.pause(100);
+            basic.showNumber(0);
+            // si FIXGPS (= type de positionnement) = 0 alors pas de fix de position,
+            // on aimerait de préférence du GPS (=1) mais fondamentalement tant que c'est fixé, ça nous convient.
+            if (parseFloat(trame[GGA_FIX_GPS_POS]) > 0) {
+                let lat = nmeaToDegrees(trame[GGA_LAT_POS], trame[GGA_LAT_POS+1]);
+                let lon = nmeaToDegrees(trame[GGA_LON_POS], trame[GGA_LON_POS+1]);
+
+                return new Location(lat, lon);
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    const MTK_INIT_CMD = "$PMTK314,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*29\r\n";
+    let isStarted : boolean = false;
+    /**
+     * Check si la trame est de type MTK et si elle l'est si c'est un type startup,
+     * Si c'est le cas, initialiser le module pour qu'il transmette les trames GGA.
+     * Traitement de l'acquittement également de l'initialisation.
+     * @param trame trame MTK découpée sur les ',' et sans la partie checksum
+     * @returns true if trame is MTK, false otherwise
+     */
+    export function checkTrameMTK(trame : string[]): boolean {
+        if (trame[0].substr(0,5) == "$PMTK") {
+            switch (trame[0].substr(5)) {
+                case "010": // sys_msg
+                    // msg = startup ended
+                    if (trame[1] == "002" && !isStarted) {
+                        // setup de l'envoie des trames GGA
+                        let buf = pins.createBuffer(MTK_INIT_CMD.length);
+                        for (let i = 0; i < MTK_INIT_CMD.length; i++) {
+                            buf.setNumber(NumberFormat.UInt8LE, i, MTK_INIT_CMD.charCodeAt(i));
+                        }
+                        pins.i2cWriteBuffer(GPS_ADDRESS, buf, false);
+                        isStarted = true;
+                    }
+                    break;
+                case "001": // ack
+                    // on ne gère pas l'acquittement de notre initialisation
+                    if (trame[1] == "314" && trame[2] == "3") {}
+                default:
+                    break;
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function nmeaToDegrees(raw: string, direction: string): number {
+        if (raw.length === 0) return 0;
+
+        let dotIndex = raw.indexOf(".");
+        if (dotIndex < 2) return 0;
+
+        // sur une chaine du type "4836.5375" :
+        // les 2 chiffres avant le point et les chiffres après représentent les minutes (ici 36.5375 min)
+        // les autres chiffres représentent les degrés (ici 48°)
+        // => on ignore ce temps
+        let degStr = raw.substr(0, dotIndex - 2);
+        let minStr = raw.substr(dotIndex - 2);
+
+        let degrees = parseFloat(degStr);
+        let minutes = parseFloat(minStr);
+
+        // conversion des degrés + minutes en degrés décimaux (latitude ou longitude)
+        // 1 minute = 1/60 degrés
+        let result = degrees + minutes / 60.0;
+
+        if (direction === "S" || direction === "W") {
+            result = -result;
+        }
+        return result;
+    }
+
     /**
      * Creates a Location, retrieve current GPS coords 
      * and automatically set it to a variable.
@@ -45,18 +178,35 @@ namespace inputSeed {
     //% blockSetVariable=location
     //% group="GPS"
     export function getLocation(): Location {
-        let location = new Location();
-        // TODO : fill location when we can retrieve GPS coords
+        let trames : string[];
+        let location : Location = new Location(0,0);
+        let tempLoc : Location | null;
+        
+        trames = getAllTrames();
+
+        for (let i = 0; i < trames.length - 1; i++) {
+            if (trames[i].trim().length > 0) {
+                // parse trame without checksum part (after '*')
+                tempLoc = parseTrameGGA(trames[i].trim().split('*')[0].split(','));
+
+                if (tempLoc != null) {
+                    location = tempLoc;
+                } else {
+                    checkTrameMTK(trames[i].trim().split('*')[0].split(','));
+                }
+            }
+        }
+
         return location;
     }
 
     export class Location {
-        lat_deg: number; // in degrees
-        lon_deg: number; // in degrees
+        latDeg: number; // in degrees
+        lonDeg: number; // in degrees
 
-        constructor() {
-            this.lat_deg = 0;
-            this.lon_deg = 0;
+        constructor(latitude : number, longitude : number) {
+            this.latDeg = latitude;
+            this.lonDeg = longitude;
         }
 
         /**
@@ -67,18 +217,18 @@ namespace inputSeed {
         //% this.defl=location
         getLocationElement(typeVal: locationType): number {
             if (typeVal === locationType.locationLat) {
-                return this.lat_deg;
+                return this.latDeg;
             } else if (typeVal === locationType.locationLon) {
-                return this.lon_deg;
+                return this.lonDeg;
             } else {
                 return NaN;
             }
         }
 
-        //Formula by Alex Punnen : https://gis.stackexchange.com/a/488625
+        // Formula by Alex Punnen : https://gis.stackexchange.com/a/488625
         // Returns the equivalent flat coordinates (in 2D meters)
         toPoint2D(): map.Point2D {
-            const lat_rad: number = degToRad(this.lat_deg);
+            const lat_rad: number = degToRad(this.latDeg);
 
             const lat_m: number = (111132.92 - 559.82 * Math.cos(2 * lat_rad)
                 + 1.175 * Math.cos(4*lat_rad) - 0.0023 * Math.cos(6*lat_rad));
@@ -88,7 +238,30 @@ namespace inputSeed {
             return new map.Point2D(long_m, lat_m);
         }
     }
+
+    let lastLocation : Location = new Location(0,0);
+
+    export function setLastLoc(loc : Location) {
+        lastLocation = loc;
+    }
 }
+
+loops.everyInterval(200, function () {
+    let trames = inputSeed.getAllTrames();
+
+    for (let i = 0; i < trames.length - 1; i++) {
+        if (trames[i].trim().length > 0) {
+            let parts = trames[i].trim().split('*')[0].split(',');
+            let tempLoc = inputSeed.parseTrameGGA(parts);
+
+            if (tempLoc != null) {
+                inputSeed.setLastLoc(tempLoc);
+            } else {
+                inputSeed.checkTrameMTK(parts);
+            }
+        }
+    }
+});
 
 //% color="#AA278D" icon="\uf279" weight=109
 namespace map {
@@ -127,12 +300,13 @@ namespace map {
         cellSize_m : number; // in meters
         points : Point2D[];
         printSize : number = 5;
+        pixelsToTurnOn : boolean[][];
 
         constructor(
             cellSize : number,
             sizeUnit : sizeUnitType
             ) {
-                this.anchor_m = (new inputSeed.Location()).toPoint2D();
+                this.anchor_m = (inputSeed.getLocation()).toPoint2D();
                 this.anchorPosition = anchorPositionType.anchorCenter;
                 if (sizeUnit == sizeUnitType.m) {
                     // sets the size in meters
@@ -173,13 +347,7 @@ namespace map {
         //% block="print $this"
         //% this.defl=map
         print() {
-            let lines : boolean[][] = [];
-            for (let i = 0; i < this.printSize; i++) {
-                lines.push([]);
-                for (let j = 0; j < this.printSize; j++) {
-                    lines[i].push(false);
-                }
-            }
+            this.resetpixelsToTurnOn();
             let screenTop : number;
             let screenLeft : number;
 
@@ -187,36 +355,36 @@ namespace map {
                 case anchorPositionType.anchorTopLeft :
                     screenTop = this.anchor_m.y + (this.cellSize_m/2);
                     screenLeft = this.anchor_m.x - (this.cellSize_m/2);
-                    lines[0][0] = true;
-                    lines = this.getCellsOfPoints(screenTop,screenLeft,lines);
+                    this.pixelsToTurnOn[0][0] = true;
+                    this.setPointsToTurnOn(screenTop,screenLeft);
                     break;
                 case anchorPositionType.anchorTopRight :
                     screenTop = this.anchor_m.y + (this.cellSize_m/2);
                     screenLeft = this.anchor_m.x - (this.cellSize_m*this.printSize + this.cellSize_m/2);
-                    lines[0][this.printSize-1] = true; // last char
-                    lines = this.getCellsOfPoints(screenTop,screenLeft,lines);
+                    this.pixelsToTurnOn[0][this.printSize-1] = true; // last char
+                    this.setPointsToTurnOn(screenTop,screenLeft);
                     break;
                 case anchorPositionType.anchorCenter :
                     screenTop = this.anchor_m.y + (this.cellSize_m*this.printSize/2 + this.cellSize_m/2);
                     screenLeft = this.anchor_m.x - (this.cellSize_m*this.printSize/2 + this.cellSize_m/2);
-                    lines[this.printSize/2][this.printSize/2] = true; // mid char
-                    lines = this.getCellsOfPoints(screenTop,screenLeft,lines);
+                    this.pixelsToTurnOn[this.printSize/2][this.printSize/2] = true; // mid char
+                    this.setPointsToTurnOn(screenTop,screenLeft);
                     break;
                 case anchorPositionType.anchorBottomLeft :
                     screenTop = this.anchor_m.y + (this.cellSize_m*this.printSize + this.cellSize_m/2);
                     screenLeft = this.anchor_m.x - (this.cellSize_m/2);
-                    lines[this.printSize-1][0] = true;
-                    lines = this.getCellsOfPoints(screenTop,screenLeft,lines);
+                    this.pixelsToTurnOn[this.printSize-1][0] = true;
+                    this.setPointsToTurnOn(screenTop,screenLeft);
                     break;
                 case anchorPositionType.anchorBottomRight :
                     screenTop = this.anchor_m.y + (this.cellSize_m*this.printSize + this.cellSize_m/2);
                     screenLeft = this.anchor_m.x - (this.cellSize_m*this.printSize + this.cellSize_m/2);
-                    lines[this.printSize-1][this.printSize-1] = true; // last char
-                    lines = this.getCellsOfPoints(screenTop,screenLeft,lines);
+                    this.pixelsToTurnOn[this.printSize-1][this.printSize-1] = true; // last char
+                    this.setPointsToTurnOn(screenTop,screenLeft);
                     break;
             }
             
-            basic.showLeds(this.convertCellsInString(lines));
+            basic.showLeds(this.convertPixelsToTurnOnInString());
         }
 
         //% block="Remove all locations in $this"
@@ -225,7 +393,7 @@ namespace map {
             this.points = [];
         }
 
-        getCellsOfPoints(limitTop : number, limitLeft : number, grid : boolean[][]) : boolean[][] {
+        setPointsToTurnOn(limitTop : number, limitLeft : number) {
             this.points.forEach(p => {
                 if (p.x >= limitLeft && p.x < limitLeft + this.printSize*this.cellSize_m 
                     && p.y <= limitTop && p.y > limitTop - this.printSize*this.cellSize_m) {
@@ -235,36 +403,54 @@ namespace map {
                         // parcours de toutes les colonnes de la grille
                         for (j = 1; j <= this.printSize; j++) {
                             // case where cell is already true
-                            if (grid[i-1][j-1]) {
+                            if (this.pixelsToTurnOn[i-1][j-1]) {
                                 break;
                             }
                             // case where p is in [i-1][j-1] cell
                             else if (p.x < limitLeft + j*this.cellSize_m && p.y > limitTop - i*this.cellSize_m) {
-                                grid[i-1][j-1] = true;
+                                this.pixelsToTurnOn[i-1][j-1] = true;
                                 break;
                             }
                         }
 
                         // case where break in prev (j) loop, p can't be in two cells
-                        if (grid[i-1][j-1]) {
+                        if (this.pixelsToTurnOn[i-1][j-1]) {
                             break;
                         }
                     }
                 }
             });
-
-            return grid;
         }
 
-        convertCellsInString(grid : boolean[][]) : string {
+        convertPixelsToTurnOnInString() : string {
             let stringGrid = "";
-            grid.forEach(l => {
+            this.pixelsToTurnOn.forEach(l => {
                 l.forEach(c => {
-                    stringGrid = c ? stringGrid.concat('#') : stringGrid.concat('.');
+                    stringGrid = c ? stringGrid += '#' : stringGrid += '.';
                 })
                 stringGrid = stringGrid.concat("\n");
             });
             return stringGrid;
+        }
+
+        resetpixelsToTurnOn() {
+            // réutilisation pour éviter de trop réserver de la mémoire
+            if (this.pixelsToTurnOn && this.pixelsToTurnOn.length === this.printSize) {
+                for (let i = 0; i < this.printSize; i++) {
+                    for (let j = 0; j < this.printSize; j++) {
+                        this.pixelsToTurnOn[i][j] = false;
+                    }
+                }
+            } else {
+                // Initialisation première fois
+                this.pixelsToTurnOn = [];
+                for (let i = 0; i < this.printSize; i++) {
+                    this.pixelsToTurnOn.push([]);
+                    for (let j = 0; j < this.printSize; j++) {
+                        this.pixelsToTurnOn[i].push(false);
+                    }
+                }
+            }
         }
     }
 
