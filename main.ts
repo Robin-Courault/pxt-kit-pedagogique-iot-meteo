@@ -225,17 +225,17 @@ namespace inputSeed {
             }
         }
 
-        // Formula by Alex Punnen : https://gis.stackexchange.com/a/488625
+        //Formula found on : https://gis.stackexchange.com/a/488625
         // Returns the equivalent flat coordinates (in 2D meters)
+        // The y axis grows from south to north
+        // The x axis grows from west to east
         toPoint2D(): map.Point2D {
             const lat_rad: number = degToRad(this.latDeg);
 
-            const lat_m: number = (111132.92 - 559.82 * Math.cos(2 * lat_rad)
-                + 1.175 * Math.cos(4*lat_rad) - 0.0023 * Math.cos(6*lat_rad));
-            const long_m: number = (111412.84 * Math.cos(lat_rad) - 93.5 * Math.cos(3*lat_rad)
-                + 0.118 * Math.cos(5*lat_rad));
+            const x_m: number = this.lonDeg * 111111 * Math.cos(lat_rad);
+            const y_m: number = this.latDeg * 111111;
 
-            return new map.Point2D(long_m, lat_m);
+            return new map.Point2D(x_m, y_m);
         }
     }
 
