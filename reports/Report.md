@@ -29,14 +29,18 @@ header-includes: |
 
 ## 3. Project Management
 
-> Where find ressources:
+> Where to find the ressources:
 >
-> - in `Appendices` section of this document
+> - in the `Appendices` section of this document
 > - on github : <https://github.com/Robin-Courault/pxt-kit-pedagogique-iot-meteo/tree/main>
 
 ### 3.1 Management Methods
 
 #### 3.1.1 Type of Management
+
+> aimed for agile (but in the end, no progressive versions, not enough contact with user)
+> organised in tasks of different sizes (some bigger than they should for agile)
+> everyday: deciding what to do next, who does what, then checking up on the other +- every hour
 
 > Between Agile, many independants tasks & substasks with multiple iterations, daily meetings, each task follow a circular process of design, implementation & test with each circle which provide a usable part.
 
