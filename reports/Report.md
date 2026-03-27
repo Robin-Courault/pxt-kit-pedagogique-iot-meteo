@@ -49,16 +49,41 @@ header-includes: |
 > Jira
 > Git, Github
 > Discord
+> Text Editor & VSCode
 
 ### 3.2 Project Analysis
 
 #### 3.2.1 Project Subject, Goals & Context
 
+> Initial description of our project
+
+> Specifications (cahier des charges), with our differents versions
+
 #### 3.2.2 Stakeholders (parties prenantes)
+
+> Our main interlocutor (client's representative), and our supervisor: DONSEZ Didier
+
+> A potential client : HARDY Christel (viewed as a validator for us)
+
+> JEAN Sébastien as facilitator/mediator with our potential client
+
+> Microsoft as MakeCode provider
 
 #### 3.2.3 Risks Analysis
 
+> Initial Risks Analysis (too short) and solutions expected
+
+> Evolution during the project & impacts
+
 #### 3.2.4 Quality Management
+
+> Criterias:
+> > Each captor has his expected blocks in MakeCode extension
+> > Each captor has an introduction part in the instructions sheet
+> > Weather balloon part in the instructions sheet
+> > \+ relevance (blocks & instructions sheet)
+> > \+ operation (blocks)
+> > \+ clear & informative (instructions sheet)
 
 ### 3.3 Planning
 
@@ -79,7 +104,7 @@ header-includes: |
 > Two Micro:bit V2 boards & one SEED board
 > One XA1110 (GPS module)
 > Two LoRa emitters (but just one assembled)
-> Two students (Sophie & Robin) during 
+> Two students (Sophie & Robin) during ~50 hours (100 hours of work for one people)
 
 #### 3.4.3 Deliverables
 
@@ -99,9 +124,24 @@ header-includes: |
 
 ### 4.1 Instructions Sheet
 
-### 4.2 Blocks
+> Skeleton of the entire sheet + each part
+> Written parts
 
-### 4.3 Code
+### 4.2 Code
+
+#### 4.2.1 Blocks
+
+> Specifications of each block and reasons of each choice
+
+#### 4.2.2 Map library
+
+#### 4.2.3 GPS library
+
+### 4.3 Researchs
+
+> Researchs done
+
+> As individual part or integrated in other parts ?
 
 `\newpage{}`{=latex}
 
