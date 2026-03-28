@@ -170,17 +170,6 @@ namespace inputSeed {
         return result;
     }
 
-    /**
-     * Creates a Location, retrieve current GPS coords 
-     * and automatically set it to a variable.
-     */
-    //% block="retrieve current location"
-    //% blockSetVariable=location
-    //% group="GPS"
-    export function getLocation(): Location {
-        return lastLocation;
-    }
-
     export class Location {
         latDeg: number; // in degrees
         lonDeg: number; // in degrees
@@ -224,6 +213,17 @@ namespace inputSeed {
 
     export function setLastLoc(loc : Location) {
         lastLocation = loc;
+    }
+
+    /**
+     * Creates a Location, retrieve current GPS coords 
+     * and automatically set it to a variable.
+     */
+    //% block="retrieve current location"
+    //% blockSetVariable=location
+    //% group="GPS"
+    export function getLocation(): Location {
+        return lastLocation;
     }
 }
 
