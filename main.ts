@@ -90,9 +90,6 @@ namespace inputSeed {
     export function parseTrameGGA(trame : string[]): Location | null {
         // GP = GPS | GN = GPS + GLONASS
         if (trame[0] == "$GPGGA" || trame[0] == "$GNGGA") {
-            basic.showNumber(8);
-            basic.pause(100);
-            basic.showNumber(0);
             // si FIXGPS (= type de positionnement) = 0 alors pas de fix de position,
             // on aimerait de préférence du GPS (=1) mais fondamentalement tant que c'est fixé, ça nous convient.
             if (parseFloat(trame[GGA_FIX_GPS_POS]) > 0) {
