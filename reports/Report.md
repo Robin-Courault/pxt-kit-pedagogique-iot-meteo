@@ -27,39 +27,39 @@ header-includes: |
 
 ## 2. Introduction
 
-Ce projet est un projet de fin de 4ème année d'étudiants ingénieurs en informatique à Polytech Grenoble, il se déroule en parallèle d'autres cours et d'une recherche de stage pouvant se révéler stressante. Le projet s'inscrit donc dans un contexte pédagogique mais réel dans le but d'avoir une situation représentative d'un projet en entreprise.
+This project is a final 4th-year project for computer science engineering students at Polytech Grenoble. It takes place alongside other courses and an internship search that can prove to be stressful. The project is therefore set within an educational yet realistic context, with the aim of creating a situation representative of a corporate project.
 
-Notre sujet consiste à constituer un kit pédagogique pour l'enseignement de l'IoT (Internet of Things = Internet des Objets) au collège. Nous visons donc un niveau adapté aux étudiants de collège, un objectif pédagogique et un résultat à destination des enseignants de collège.
+Our subject involves creating an educational kit for teaching IoT (Internet of Things) in middle school. We are therefore targeting a level suitable for middle school students, with a pedagogical objective and a result intended for middle school teachers.
 
-Ce projet est sous la supervision de monsieur Didier DONSEZ, qui représentera également le client, ses besoins et exigences sous le rôle de maître d'ouvrage (MOA) et de maître d'oeuvre (MOE). L'équipe de projet est composée de deux étudiants, Robin COURAULT et Sophie HAUGUEL. Après plusieurs semaines, nous avons obtenu le contact d'une cliente potentielle, une enseignante intéressée, madame Christel HARDY. Dans le même temps monsieur Sébastien JEAN s'est indiqué comme facilitator/mediator pour nos communications avec madame HARDY.
+This project is supervised by Mr. Didier DONSEZ, who also represents the client, his needs, and requirements in the roles of Project Owner (PO, or MOA in french) and Project Manager (PM, or MOE in french). The project team consists of two students, Robin COURAULT and Sophie HAUGUEL, the project team has also a part of Project Manager role. After several weeks, we established contact with a potential client, an interested teacher, Mrs. Christel HARDY. At the same time, Mr. Sébastien JEAN identified himself as a facilitator/mediator for our communications with Mrs. HARDY.
 
-![Figure 1 : Parties Prenantes du projet](Parties_prenantes.png "Figure 1 : Parties Prenantes du projet")
+![Figure 1: Project Stakeholders](Parties_prenantes.png "Figure 1: Project Stakeholders")
 
-L'analyse des besoins s'est avéré complexe par la forte occupation de notre principal interlocuteur. Le cahier des charges s'est révélé difficile à préciser et à stabiliser, après une première version basée sur l'unique phrase servant de sujet au projet, nous avons réalisé une seconde version en discutant avec monsier DONSEZ, puis rectifié au cours du projet à mesure que nous avançions et posions des questions. La validation de la seconde version du cahier des charges n'a jamais été réalisé malgré nos mails et tentatives orales pour le faire. C'est à travers des questions et discussions que nous avons paufiné le cahier des charges.
+The needs analysis proved complex due to our main contact's busy schedule. The specifications (cahier des charges) were difficult to define and stabilize; after a first version based on the single sentence serving as the project subject, we produced a second version by discussing it with Mr. DONSEZ, then adjusted it throughout the project as we progressed and asked questions. The validation of the second version of the specifications was never finalized despite our emails and verbal attempts. It was through questions and discussions that we refined the requirements.
 
-La seconde version de notre cahier des charges identifie 2 livrables attendus, en plus des livrables induits par le contexte pédagogique (rapport + soutenance), un sujet de travail pratique (TP) à destination des enseignants et des collégiens ainsi qu'une extension pour l'interface de programmation no-code `MakeCode`. Ces deux livrables devaient permettre l'utilisation de modules additionnels ajoutés à une carte `Micro:bit V2` par l'intermédiaire d'une carte d'extension `SEED` dans l'objectif de permettre la création d'un ballon météo aux collégiens.
+The second version of our specifications identifies two expected deliverables, in addition to the deliverables inherent to the educational context (report + defense): a practical work (TP in french) assignment for teachers and middle schoolers, as well as an extension for the `MakeCode` no-code programming interface. These two deliverables were intended to allow the use of additional modules added to a `Micro:bit V2` board via a `SEED` expansion board, with the goal of enabling middle schoolers to create a weather balloon.
 
-Ainsi le sujet de TP a été décrit dans notre cahier des charges comme étant indépendant d'autres ressources, à destination d'utilisateurs connaissant déjà la `Micro:bit V2`, abordant chaque nouveau module utile pour le ballon météo et devant être au format `Markdown`. Afin de convenir à des collégiens, nous avons convenu d'un format plutôt court pour chacune des parties de notre sujet de TP, chaque partie étant composée :
+Thus, the practical work assignment was described in our specifications as being independent of other resources, intended for users already familiar with the `Micro:bit V2`, covering each new module useful for the weather balloon, and required to be in `Markdown` format. To suit middle school students, we agreed on a rather short format for each part of our practical work assignment, with each part consisting of:
 
-- de consignes de manipulation, nécessitant d'explorer et comprendre;
-- d'une correction des manipulations et d'explications courtes;
-- d'un éventuel cours de découvert afin d'expliquer l'intérêt de la partie dans l'objectif d'élaborer un ballon météo.
+- manipulation instructions, requiring exploration and understanding;
+- a correction of the manipulations and short explanations;
+- an optional discovery lesson to explain the relevance of the section toward building a weather balloon.
 
-Pour couvrir l'ensemble des modules nécessaires au ballon météo, tout en gardant une suite logique et pédagogique, nous avons fait le choix de définir les parties suivantes pour le sujet :
+To cover all the modules necessary for the weather balloon while maintaining a logical and pedagogical sequence, we chose to define the following sections for the assignment:
 - Introduction
-- Test de lancement (vérifier si la carte fonctionne)
-- Exploration des modules avec :
-    - Thermomètre
-    - Accéléromètre
-    - Capteur de pression
-    - Capteur d'humidité
+- Launch test (checking if the board works)
+- Exploration of the modules with:
+    - Thermometer
+    - Accelerometer
+    - Pressure sensor
+    - Humidity sensor
     - GPS
-    - Emetteur/Récepteur LoRa
-- Elaboration du programme pour le ballon météo, permettant également de consolider les acquis.
+    - LoRa Transmitter/Receiver
+- Development of the program for the weather balloon, also allowing for the consolidation of acquired knowledge.
 
-Pour compléter le sujet de TP, une extension pour `MakeCode` nous a été demandée, devant permettre d'abstraire le fonctionnement matériel compliqué de chacun des modules. L'extension étant uniquement à destination de la carte `Micro:bit V2`.
+To complement the TP assignment, an extension for `MakeCode` was requested, which should abstract the complex hardware operation of each module. This extension is exclusively intended for the `Micro:bit V2` board.
 
-Cette description permet de remplir à terme le besoin qui est de faire découvrir l'internet des objets à des collégiens.
+This description ultimately serves to fulfill the need to introduce middle schoolers to the Internet of Things (IoT).
 
 `\newpage{}`{=latex}
 
