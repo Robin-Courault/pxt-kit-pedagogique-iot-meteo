@@ -178,26 +178,7 @@ namespace inputSeed {
     //% blockSetVariable=location
     //% group="GPS"
     export function getLocation(): Location {
-        let trames : string[];
-        let location : Location = new Location(0,0);
-        let tempLoc : Location | null;
-        
-        trames = getAllTrames();
-
-        for (let i = 0; i < trames.length - 1; i++) {
-            if (trames[i].trim().length > 0) {
-                // parse trame without checksum part (after '*')
-                tempLoc = parseTrameGGA(trames[i].trim().split('*')[0].split(','));
-
-                if (tempLoc != null) {
-                    location = tempLoc;
-                } else {
-                    checkTrameMTK(trames[i].trim().split('*')[0].split(','));
-                }
-            }
-        }
-
-        return location;
+        return lastLocation;
     }
 
     export class Location {
