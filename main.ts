@@ -40,17 +40,17 @@ namespace inputSeed {
     const GPS_ADDRESS = 0x10;
     let trameBuffer : string = "";
     /**
-     * Lit 32 octets depuis le GPS via I2C
+     * Reads 32 bytes from the GPS via I2C
      */
     function readRawData(): string {
         let result = "";
         try {
-            // Lecture des octets depuis le module
+            // Reading bytes from the module
             let data = pins.i2cReadBuffer(GPS_ADDRESS, 32, false);
 
             for (let i = 0; i < data.length; i++) {
                 let charCode = data.getNumber(NumberFormat.UInt8LE, i);
-                // Filtrer les caractères valides (ASCII imprimable)
+                // Filter valid characters (printable ASCII)
                 if (charCode >= 32 && charCode <= 126) {
                     result += String.fromCharCode(charCode);
                 } 
@@ -71,10 +71,10 @@ namespace inputSeed {
 
         trameBuffer += raw;
 
-        // Traitement des phrases complètes
+        // Processing complete sentences
         let lines = trameBuffer.split("\n");
 
-        // Garder la dernière ligne incomplète dans le buffer
+        // Keep the last incomplete line in the buffer
         trameBuffer = lines[lines.length - 1];
 
         return lines;
@@ -84,14 +84,14 @@ namespace inputSeed {
     const GGA_LON_POS = 4;
     const GGA_FIX_GPS_POS = 6;
     /**
-     * @param trame trame GGA découpée sur les ',' et sans la partie checksum
-     * @returns null si trame vide, ou si trame n'est pas de type GGA, ou si pas de fix GPS, sinon Location avec coordonnées de la trame lue
+     * @param trame GGA sentence split by ',' without the checksum part
+     * @returns null if trame is empty, or if trame is not GGA type, or if no GPS fix, otherwise Location with coordinates from the read trame
      */
     export function parseTrameGGA(trame : string[]): Location | null {
         // GP = GPS | GN = GPS + GLONASS
         if (trame[0] == "$GPGGA" || trame[0] == "$GNGGA") {
-            // si FIXGPS (= type de positionnement) = 0 alors pas de fix de position,
-            // on aimerait de préférence du GPS (=1) mais fondamentalement tant que c'est fixé, ça nous convient.
+            // if FIXGPS (= positioning type) = 0 then no position fix,
+            // we would prefer GPS (=1) but fundamentally any fix is acceptable
             if (parseFloat(trame[GGA_FIX_GPS_POS]) > 0) {
                 let lat = nmeaToDegrees(trame[GGA_LAT_POS], trame[GGA_LAT_POS+1]);
                 let lon = nmeaToDegrees(trame[GGA_LON_POS], trame[GGA_LON_POS+1]);
@@ -108,10 +108,9 @@ namespace inputSeed {
     const MTK_INIT_CMD = "$PMTK314,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*29\r\n";
     let isStarted : boolean = false;
     /**
-     * Check si la trame est de type MTK et si elle l'est si c'est un type startup,
-     * Si c'est le cas, initialiser le module pour qu'il transmette les trames GGA.
-     * Traitement de l'acquittement également de l'initialisation.
-     * @param trame trame MTK découpée sur les ',' et sans la partie checksum
+     * Checks if the trame is of MTK type and if it's a startup type,
+     * If so, initializes the module to transmit GGA sentences.
+     * @param trame MTK sentence split by ',' without the checksum part
      * @returns true if trame is MTK, false otherwise
      */
     export function checkTrameMTK(trame : string[]): boolean {
@@ -120,7 +119,7 @@ namespace inputSeed {
                 case "010": // sys_msg
                     // msg = startup ended
                     if (trame[1] == "002" && !isStarted) {
-                        // setup de l'envoie des trames GGA
+                        // setup GGA sentence transmission
                         let buf = pins.createBuffer(MTK_INIT_CMD.length);
                         for (let i = 0; i < MTK_INIT_CMD.length; i++) {
                             buf.setNumber(NumberFormat.UInt8LE, i, MTK_INIT_CMD.charCodeAt(i));
@@ -130,7 +129,7 @@ namespace inputSeed {
                     }
                     break;
                 case "001": // ack
-                    // on ne gère pas l'acquittement de notre initialisation
+                    // we don't handle the initialization acknowledgment
                     if (trame[1] == "314" && trame[2] == "3") {}
                 default:
                     break;
@@ -147,18 +146,17 @@ namespace inputSeed {
         let dotIndex = raw.indexOf(".");
         if (dotIndex < 2) return 0;
 
-        // sur une chaine du type "4836.5375" :
-        // les 2 chiffres avant le point et les chiffres après représentent les minutes (ici 36.5375 min)
-        // les autres chiffres représentent les degrés (ici 48°)
-        // => on ignore ce temps
+        // For a string like "4836.5375":
+        // The 2 digits before the dot and the digits after represent minutes (here 36.5375 min)
+        // The other digits represent degrees (here 48°)
         let degStr = raw.substr(0, dotIndex - 2);
         let minStr = raw.substr(dotIndex - 2);
 
         let degrees = parseFloat(degStr);
         let minutes = parseFloat(minStr);
 
-        // conversion des degrés + minutes en degrés décimaux (latitude ou longitude)
-        // 1 minute = 1/60 degrés
+        // Convert degrees + minutes to decimal degrees (latitude or longitude)
+        // 1 minute = 1/60 degrees
         let result = degrees + minutes / 60.0;
 
         if (direction === "S" || direction === "W") {
