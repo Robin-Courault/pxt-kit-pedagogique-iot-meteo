@@ -23,7 +23,43 @@ header-includes: |
 
 ## 1. Abstract
 
+`\newpage{}`{=latex}
+
 ## 2. Introduction
+
+Ce projet est un projet de fin de 4ème année d'étudiants ingénieurs en informatique à Polytech Grenoble, il se déroule en parallèle d'autres cours et d'une recherche de stage pouvant se révéler stressante. Le projet s'inscrit donc dans un contexte pédagogique mais réel dans le but d'avoir une situation représentative d'un projet en entreprise.
+
+Notre sujet consiste à constituer un kit pédagogique pour l'enseignement de l'IoT (Internet of Things = Internet des Objets) au collège. Nous visons donc un niveau adapté aux étudiants de collège, un objectif pédagogique et un résultat à destination des enseignants de collège.
+
+Ce projet est sous la supervision de monsieur Didier DONSEZ, qui représentera également le client, ses besoins et exigences sous le rôle de maître d'ouvrage (MOA) et de maître d'oeuvre (MOE). L'équipe de projet est composée de deux étudiants, Robin COURAULT et Sophie HAUGUEL. Après plusieurs semaines, nous avons obtenu le contact d'une cliente potentielle, une enseignante intéressée, madame Christel HARDY. Dans le même temps monsieur Sébastien JEAN s'est indiqué comme facilitator/mediator pour nos communications avec madame HARDY.
+
+![Figure 1 : Parties Prenantes du projet](Parties_prenantes.png "Figure 1 : Parties Prenantes du projet")
+
+L'analyse des besoins s'est avéré complexe par la forte occupation de notre principal interlocuteur. Le cahier des charges s'est révélé difficile à préciser et à stabiliser, après une première version basée sur l'unique phrase servant de sujet au projet, nous avons réalisé une seconde version en discutant avec monsier DONSEZ, puis rectifié au cours du projet à mesure que nous avançions et posions des questions. La validation de la seconde version du cahier des charges n'a jamais été réalisé malgré nos mails et tentatives orales pour le faire. C'est à travers des questions et discussions que nous avons paufiné le cahier des charges.
+
+La seconde version de notre cahier des charges identifie 2 livrables attendus, en plus des livrables induits par le contexte pédagogique (rapport + soutenance), un sujet de travail pratique (TP) à destination des enseignants et des collégiens ainsi qu'une extension pour l'interface de programmation no-code `MakeCode`. Ces deux livrables devaient permettre l'utilisation de modules additionnels ajoutés à une carte `Micro:bit V2` par l'intermédiaire d'une carte d'extension `SEED` dans l'objectif de permettre la création d'un ballon météo aux collégiens.
+
+Ainsi le sujet de TP a été décrit dans notre cahier des charges comme étant indépendant d'autres ressources, à destination d'utilisateurs connaissant déjà la `Micro:bit V2`, abordant chaque nouveau module utile pour le ballon météo et devant être au format `Markdown`. Afin de convenir à des collégiens, nous avons convenu d'un format plutôt court pour chacune des parties de notre sujet de TP, chaque partie étant composée :
+
+- de consignes de manipulation, nécessitant d'explorer et comprendre;
+- d'une correction des manipulations et d'explications courtes;
+- d'un éventuel cours de découvert afin d'expliquer l'intérêt de la partie dans l'objectif d'élaborer un ballon météo.
+
+Pour couvrir l'ensemble des modules nécessaires au ballon météo, tout en gardant une suite logique et pédagogique, nous avons fait le choix de définir les parties suivantes pour le sujet :
+- Introduction
+- Test de lancement (vérifier si la carte fonctionne)
+- Exploration des modules avec :
+    - Thermomètre
+    - Accéléromètre
+    - Capteur de pression
+    - Capteur d'humidité
+    - GPS
+    - Emetteur/Récepteur LoRa
+- Elaboration du programme pour le ballon météo, permettant également de consolider les acquis.
+
+Pour compléter le sujet de TP, une extension pour `MakeCode` nous a été demandée, devant permettre d'abstraire le fonctionnement matériel compliqué de chacun des modules. L'extension étant uniquement à destination de la carte `Micro:bit V2`.
+
+Cette description permet de remplir à terme le besoin qui est de faire découvrir l'internet des objets à des collégiens.
 
 `\newpage{}`{=latex}
 

@@ -1,17 +1,17 @@
 1. Abstract
-2. Introduction
-    2.1 Project Subject, Context and Stakeholders
-> présentation sujet
-> contexte
-> parties prenantes
+2. Introduction ✓
+    2.1 Project Subject, Context and Stakeholders ✓
+> présentation sujet ✓
+> contexte ✓
+> parties prenantes ✓
 
-    2.2 Goals (besoins, cahier des charges)
-> analyse des besoins
-> cahier des charges
+    2.2 Goals (besoins, cahier des charges) ✓
+> analyse des besoins ✓
+> cahier des charges ✓
 
-    2.3 General method
-> outils utilisés (produit + management)
-> liste des livrables
+    2.3 General method ✓
+> outils utilisés (produit + management) => sera réalisé dans les parties suivantes
+> liste des livrables ✓
 
 3. Project Management
 > objectifs de management : travail qu'en séance + égalisation des compétences + maîtrise de toute partie du sujet par tous
@@ -30,12 +30,12 @@
 > respect ou non des objectifs
 > bilan "financier"
 
-4. Technical Work
-> explication des choix de réalisation (SI nécessaire & pertinent!!)
+4. Technical Work ✓
+> explication des choix de réalisation (SI nécessaire & pertinent!!) ✓
 
-    4.1 Instructions Sheet
-    4.2 Blocks
-    4.3 Code
+    4.1 Instructions Sheet ✓
+    4.2 Blocks ✓
+    4.3 Code ✓
 5. Conclusion
 > analyse des impacts
 > ce qui est à améliorer
