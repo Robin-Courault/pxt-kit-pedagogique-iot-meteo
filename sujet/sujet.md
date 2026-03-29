@@ -60,11 +60,6 @@ Connaitre la température a plusieurs intérêts :
 
 [Pour en savoir plus, Météo France a une petite page explicative, clique ici](https://meteofrance.com/comprendre-la-meteo/temperatures/quest-ce-que-la-temperature).
 
-<!-- ### Accéléromètre (micro:bit) -->
-<!---->
-<!-- 1) fonction d'affichage de barre d'accélération -->
-<!-- 2) affichage de l'accélération -->
-
 ### III.B. Pression (SEED)
 
 #### III.B.1. Utilisation du capteur de pression
