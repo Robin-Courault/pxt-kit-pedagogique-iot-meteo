@@ -9,7 +9,7 @@
 ### Obtention tardive des composants
 
 Le projet a commencé le 19 janvier. 
-Cependant, nous n'avons eu tous les composants que le 24/02
+Cependant, nous n'avons eu tous les composants que le 24/02.
 
 ### Compilation makecode
 
@@ -33,8 +33,10 @@ Exigences de M. Donsez pour le ballon météo et la réception des données LoRa
 
 ## Pistes futures
 
-bien expliquer tous les problèmes auxquels nous avons fait face
+Dans le rapport : bien expliquer tous les problèmes auxquels nous avons fait face.
 
-micropython du lora : pour faire fonctionner rapidement
+Pour quand même rendre quelque chose en LoRa, nous pouvons l'implémenter en micropython.
+Il y a plus de documentation, et c'est certainement une bonne première étape pour derrière en faire des blocs.
 
-documentation : pour permettre à d'autres d'éviter nos erreurs
+Réaliser une documentation : pour permettre à d'autres d'éviter nos erreurs.
+Aussi, puisque trouver les informations est une grande difficulté, les rassembler à un endroit pourrait faciliter le travail des suivants.
