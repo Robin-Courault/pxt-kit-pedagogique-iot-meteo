@@ -109,5 +109,10 @@
 
 ## 24/03/2026
 
+- SH : Fin Gantt
+- RC : Squelette du Rapport
 
+## 26/03/2026 -> 29/03/2026
 
+- RC : Ecriture du rapport
+- SH : Flyer, Poster et relecture du rapport
