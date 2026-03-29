@@ -1034,12 +1034,34 @@ basic.forever(function () {
 
 # Bibliography
 
-> SEED's github
-> Micro:bit documentation on micro:bit v2 board
-> Microsoft documentation on micro:bit v2 board
-> MakeCode documentation
-> XA1110 Sparkfun explainations and library
-> XA1110 Hardware Plan
-> PMTK documentation
-> LoRa Emitter Hardware Plan
-> Forums, which ones ?
+> made with <https://www.scribbr.fr> or manually when scribbr didn't work.
+
+- Extension localization files. (s. d.). Microsoft. <https://makecode.com/extensions/localization>
+- Naming Conventions. (s. d.). Microsoft. <https://makecode.com/extensions/naming-conventions>
+- MakeCode Languages: Blocks, Static TypeScript and Static Python. (s. d.). Microsoft. <https://makecode.com/language>
+- Auto-generation of library files. (s. d.). Microsoft. <https://makecode.com/simshim>
+- Defining Blocks. (s. d.). Microsoft. <https://makecode.com/defining-blocks>
+- Building your own extension. (s. d.). Microsoft. <https://makecode.com/extensions/getting-started>
+- Micro:bit MakeCode extensions. (s. d.). Microsoft. <https://makecode.com/extensions/approval>
+- micro : bit MakeCode extensions. (s. d.). Help & Support. <https://support.microbit.org/support/solutions/articles/19000054952-package-approval>
+- microsoft. (s. d.-b). pxt-sonar/main.ts at master · microsoft/pxt-sonar. GitHub. <https://github.com/microsoft/pxt-sonar/blob/master/main.ts>
+- BBC micro:bit overview. (s. d.). <https://microbit.org/get-started/features/overview/>
+- Edge Connector and Pinout. (s. d.). <https://tech.microbit.org/hardware/edgeconnector/>
+- Micro:Bit Hardware. (s. d.). <https://tech.microbit.org/hardware/>
+- CampusIoT. (s. d.). tutorial/microbit at master · CampusIoT/tutorial. GitHub. <https://github.com/CampusIoT/tutorial/tree/master/microbit>
+- Sparkfun. (s. d.). GitHub - sparkfun/SparkFun_I2C_GPS_Arduino_Library : Library for reading and controlling MT3333 and MT3339 based GPS modules over I2C. GitHub. <https://github.com/sparkfun/SparkFun_I2C_GPS_Arduino_Library/tree/master>
+- How can I code in C++ using the micro : bit. (s. d.). Help & Support. <https://support.microbit.org/support/solutions/articles/19000017961-how-can-i-code-in-c-using-the-micro-bit>
+- NWCPP - Northwest C++ Users Group. (2018, 19 avril). Microsoft MakeCode : from C++  to TypeScript and Blockly (and Back) [Vidéo]. YouTube. <https://www.youtube.com/watch?v=tGhhV2kfJ-w>
+- microsoft. (s. d.). GitHub - microsoft/pxt-microbit : A Blocks / JavaScript code editor for the micro : bit built on Microsoft MakeCode. GitHub. <https://github.com/microsoft/pxt-microbit>
+- Understanding the Compilation and Linking Process in PXT-Microbit MakeCode : From Blocks to Hex File. (2024, 13 novembre). Microsoft MakeCode. <https://forum.makecode.com/t/understanding-the-compilation-and-linking-process-in-pxt-microbit-makecode-from-blocks-to-hex-file/31682>
+- WIO-SX1262 Introduction | Seeed Studio Wiki. (2024, 12 octobre). <https://wiki.seeedstudio.com/wio_sx1262/>
+- seed_microbit · main · ThingSat / seed · GitLab. (s. d.). GitLab. <https://gricad-gitlab.univ-grenoble-alpes.fr/thingsat/seed/-/tree/main/seed_microbit>
+- Cytron Technologies Sdn Bhd / RH2T / EDUBIT - Training and Project Kit for microbit · GitLab. (s. d.). GitLab. <https://gitlab.com/cytrontech/rh2t/edubit>
+- Bhavithiran. (s. d.). micropython-edubit/edubit.py at master · Bhavithiran97/micropython-edubit. GitHub. <https://github.com/Bhavithiran97/micropython-edubit/blob/master/edubit.py>
+- Micro:Bit MakeCode Documentation. Microsoft <https://makecode.microbit.org/v1/reference/>
+- Micro:Bit MakeCode Documentation. Microsoft. <https://makecode.microbit.org/blocks>
+- NMEA 0183. (2025, 15 octobre). <https://fr.wikipedia.org/wiki/NMEA_0183>
+- MT3333 PLATFORM NMEA Specification for GPS + GLONASS. <https://simcom.ee/documents/SIM33ELA/MT3333%20Platform%20NMEA%20Message%20Specification%20For%20GPS%2BGLONASS_V1.00.pdf>
+- Micro:Bit Schematics. (s. d.). <https://tech.microbit.org/hardware/schematic/>
+- Micro:Bit I2C int/ext bus. (s. d.). <https://tech.microbit.org/hardware/i2c/>
+- Micro:Bit I2C Protocol Specification. (s. d.). <https://tech.microbit.org/software/spec-i2c-protocol/>
