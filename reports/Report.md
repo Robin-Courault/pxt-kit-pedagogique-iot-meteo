@@ -7,7 +7,7 @@ subtitle: |
   Redaction Date: 26/03/2026
 author: COURAULT Robin, HAUGUEL Sophie
 output: pdf_document
-fontsize: 12pt
+fontsize: 10pt
 numbersections: true
 linestretch: 1.5
 toc: true
