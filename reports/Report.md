@@ -1,9 +1,9 @@
 ---
 title: "Project Report"
 subtitle: |
-  10 - kit to discover IoT with college students
-  INFO 4th year | 2025-2026 | Polytech Grenoble
-  Supervisor: DONSEZ Didier
+  10 - kit to discover IoT with college students \
+  INFO 4th year | 2025-2026 | Polytech Grenoble \
+  Supervisor: DONSEZ Didier \
   Redaction Date: 26/03/2026
 author: COURAULT Robin, HAUGUEL Sophie
 output: pdf_document
@@ -47,15 +47,16 @@ Thus, the practical work assignment was described in our specifications as being
 - an optional discovery lesson to explain the relevance of the section toward building a weather balloon.
 
 To cover all the modules necessary for the weather balloon while maintaining a logical and pedagogical sequence, we chose to define the following sections for the assignment:
+
 - Introduction
 - Launch test (checking if the board works)
 - Exploration of the modules with:
-    - Thermometer
-    - Accelerometer
-    - Pressure sensor
-    - Humidity sensor
-    - GPS
-    - LoRa Transmitter/Receiver
+  - Thermometer
+  - Accelerometer
+  - Pressure sensor
+  - Humidity sensor
+  - GPS
+  - LoRa Transmitter/Receiver
 - Development of the program for the weather balloon, also allowing for the consolidation of acquired knowledge.
 
 To complement the TP assignment, an extension for `MakeCode` was requested, which should abstract the complex hardware operation of each module. This extension is exclusively intended for the `Micro:bit V2` board.
@@ -130,6 +131,7 @@ As can be seen, several risks unforeseen at the start of the project proved crit
 ## Financial Assessment
 
 This project was carried out with limited resources, though they were sufficient except regarding time. we had:
+
 - 2 laptops
 - 2 Micro:bit V2
 - 1 XA1110 GPS module
@@ -151,9 +153,9 @@ We then developed a more advanced skeleton detailing each part. This time, we ad
 In the final stage, each part was written by completing the previously defined skeleton. An introduction was also added to present the final goal of the project: the development of a program for a sounding balloon or weather balloon. For each part, the first step was to introduce the section with a short sentence, such as: `To ensure everything is properly installed, let's start with a quick test:`. We then wrote the manipulation instructions to be as concise, explicit, and precise as possible, for example:
 
 ```md
-- Try to make the LED blink.
+Try to make the LED blink.
 
-    > It should turn on for 500ms, turn off for 500ms, then repeat indefinitely.
+    It should turn on for 500ms, turn off for 500ms, then repeat indefinitely.
 ```
 
 Following the instructions, a small lesson section explains the importance of the sensor in the context of a weather balloon. This lesson part required research, but there was no need to be exhaustive; its purpose was only to provide the broad outlines of the sensor's utility. We supplemented this with a short link redirecting to explanatory pages from Météo-France, so that interested students could find more information or an alternative explanation.
@@ -162,12 +164,11 @@ Finally, the drafting of the parts concluded with the correction elements, which
 
 In total, 4 parts were written: `Thermometer`, `Pressure`, `Humidity`, and `GPS`, the latter not being completely finished as a short lesson is potentially missing. Furthermore, these parts do not all have a correction and are not necessarily implemented at the MakeCode extension level, but we will discuss this further on.
 
-> see in [Appendices](#62-instructions-sheet), each part of the instructions sheet.
+> see in [Appendices](#appendices---instructions-sheet), each part of the instructions sheet.
 
 ## Code
 
 > See branch `code`, file `main.ts`.
-
 > The `//%` annotations in the code are used by MakeCode to generate blocks and categories in the interface.
 
 ### Blocks
@@ -198,13 +199,14 @@ For the third set of blocks, the GPS was addressed:
 
 - `getLocation` block: allows the current location to be retrieved in the form of an object consisting of two elements; this block aimed to introduce students to the world of the object-oriented paradigm while providing a simple way to retrieve a meaningful location.
 - `getLocationElement` block: allowing the retrieval of the longitude or latitude of a `Location` object using a block that lets the user select one or the other value via a dropdown list.
-- We then chose to add several additional blocks to add interaction to the project and allow students to visually see the location evolve; we will see the implementation in more detail in the [Map library](#422-map-library) section. Of course, these blocks are not intended for use in the actual weather balloon:
-    - `createMap` block: allowing the construction of a `Map` object; this object can be seen as an aggregate of `Location` objects converted into flat coordinates. The `Map` object aims to allow the display of `Locations` more simply for students using the Micro:bit's 5x5 LED screen.
-    - `addLocation` block: allowing a `Location` to be added to a `Map`.
-    - `clearMap` block: allowing all points in a `Map` to be deleted.
-    - `setAnchor` block: allowing the anchor point used to display the `Map` to be redefined from a `Location` (without adding the `Location` to the Map points).
-    - `moveAnchor` block: allowing the anchor point to be redefined by providing an offset in grid cells from the current anchor point.
-    - `setCellSize` block: allowing the size of the `Map` cells to be redefined; when at least 1 point is located in a cell, it is lit up.
+- We then chose to add several additional blocks to add interaction to the project and allow students to visually see the location evolve; we will see the implementation in more detail in the [Map library](#map-library) section. Of course, these blocks are not intended for use in the actual weather balloon:
+
+  - `createMap` block: allowing the construction of a `Map` object; this object can be seen as an aggregate of `Location` objects converted into flat coordinates. The `Map` object aims to allow the display of `Locations` more simply for students using the Micro:bit's 5x5 LED screen.
+  - `addLocation` block: allowing a `Location` to be added to a `Map`.
+  - `clearMap` block: allowing all points in a `Map` to be deleted.
+  - `setAnchor` block: allowing the anchor point used to display the `Map` to be redefined from a `Location` (without adding the `Location` to the Map points).
+  - `moveAnchor` block: allowing the anchor point to be redefined by providing an offset in grid cells from the current anchor point.
+  - `setCellSize` block: allowing the size of the `Map` cells to be redefined; when at least 1 point is located in a cell, it is lit up.
 
 #### LoRa
 
@@ -356,7 +358,8 @@ clear() {
 }
 ```
 
-As for the display block (`print`), we will not cover all of its code as it is quite long, but you can find its code and that of its utility functions in the [Appendices](#611-map---print--additionnals-functions). The general idea is as follows:
+As for the display block (`print`), we will not cover all of its code as it is quite long, but you can find its code and that of its utility functions in the [Appendices](#map---print--additionnals-functions). The general idea is as follows:
+
 - Reset the array of pixels to be lit.
 - Define a top boundary value and a left boundary value based on the display position and the anchor point coordinates.
 - Set the anchor point pixel as one to be displayed, even if it is not part of the `Map` points.
@@ -450,7 +453,7 @@ export function getAllTrames(): string[] {
     trameBuffer += raw;
 
     // Processing complete phrases
-    let lines = trameBuffer.split("\n");
+    let lines = trameBuffer.split(""); // caractère de saut de ligne mais compilateur md to pdf ne veut pas donc retiré, see main.ts
 
     // Keep the last incomplete line in the buffer
     trameBuffer = lines[lines.length - 1];
@@ -461,7 +464,7 @@ export function getAllTrames(): string[] {
 
 The retrieval of raw data is done by reading a maximum of 32 bytes from the GPS module's address. For each byte, it checks if it is a printable character or one of the two end-of-line characters; if so, it adds it to the result returned at the end.
 
-> Note that subsequently, we will have two '\n' at each line end, which will create empty array elements in `getAllTrames()` during splitting; however, this is not a problem as an empty element is ignored in the regular loop.
+> Note that subsequently, we will have two '\\n' at each line end, which will create empty array elements in `getAllTrames()` during splitting; however, this is not a problem as an empty element is ignored in the regular loop.
 
 ```ts
 function readRawData(): string {
@@ -478,7 +481,7 @@ function readRawData(): string {
             } 
             // CR + LF
             else if (charCode === 13 || charCode === 10) {
-                result += "\n";
+                result += ""; // caractère de saut de ligne mais compilateur md to pdf ne veut pas donc retiré, see main.ts
             }
         }
     } catch (e) {
@@ -516,7 +519,7 @@ export function parseTrameGGA(trame : string[]): Location | null {
 For the processing of MTK sentences, we check the prefix and then remove it. In the case where we have a system message, we look at its meaning; if it indicates the end of startup, we define the sentences we wish to receive—in this case, only GGA.
 
 ```ts
-const MTK_INIT_CMD = "$PMTK314,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*29\r\n";
+const MTK_INIT_CMD = "$PMTK314,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*29\r"; // + caractère de saut de ligne mais compilateur md to pdf ne veut pas donc retiré, see main.ts
 let isStarted : boolean = false;
 export function checkTrameMTK(trame : string[]): boolean {
     if (trame[0].substr(0,5) == "$PMTK") {
@@ -674,11 +677,11 @@ resetpixelsToTurnOn() {
 }
 ```
 
-## Instructions sheet
+## Appendices - Instructions sheet
 
-> can be finded on the [github](https://github.com/Robin-Courault/pxt-kit-pedagogique-iot-meteo/tree/main) in the folder `sujet`
+> can be finded on the [github](https://github.com/Robin-Courault/pxt-kit-pedagogique-iot-meteo/tree/main) in the folder `sujet`.
 
-### Introduction
+### Appendices - Introduction
 
 ```md
 # Kit pédagogique SEED micro:bit
@@ -693,16 +696,16 @@ Ils s'élèvent dans le ciel, à plus de 25km du sol ! Cela leur permet de mesur
 
 L'objectif de ce travail pratique est de réaliser un programme capable de mesurer des données et de les envoyer à une antenne, ce programme sera mis en application par une carte électronique qui pourra ensuite être déposée dans la nacelle d'un ballon :
 
-1. Après un court test de la carte, tu vas découvrir chaque capteur indépendamment afin de comprendre leur fonctionnement et leur utilisation. [Partie III - Les Capteurs](#iii-les-capteurs).
-2. Une fois les capteurs maitrisés, tu découvriras un moyen de communication qu'utilises les objets connectés, la communication à longue portée dites `LoRa` pour `Long Range`. [Partie IV - La communication LoRa](#iv-communication-lora-à-ajouter)
-3. Une fois que tu sauras utiliser tous les capteurs et communiquer, tu pourras réaliser ton propre programme de ballon météo. [Partie V - Le Ballon](#v-ballon-météorologique--envoi-de-toutes-les-données-au-format-aprs-).
+1. Après un court test de la carte, tu vas découvrir chaque capteur indépendamment afin de comprendre leur fonctionnement et leur utilisation. \[Partie III - Les Capteurs]\(#iii-les-capteurs).
+2. Une fois les capteurs maitrisés, tu découvriras un moyen de communication qu'utilises les objets connectés, la communication à longue portée dites `LoRa` pour `Long Range`. \[Partie IV - La communication LoRa]\(#iv-communication-lora-à-ajouter)
+3. Une fois que tu sauras utiliser tous les capteurs et communiquer, tu pourras réaliser ton propre programme de ballon météo. \[Partie V - Le Ballon]\(#v-ballon-météorologique--envoi-de-toutes-les-données-au-format-aprs-).
 
 > Pas de panique, tu seras guidé tout au long de ce travail pratique.
 
 **Attention :** toucher les parties métalliques de la carte pendant son fonctionnement peut l'abîmer ! De plus, la carte n'aime pas l'eau...
 ```
 
-### Test de Lancement
+### Appendices - Test de Lancement
 
 ```md
 ## II. Test de lancement - Faire clignoter une LED
@@ -713,10 +716,10 @@ Pour s'assurer que tout est bien installé, commençons par un petit test :
 
     > Elle doit s'allumer 500ms, s'éteindre 500ms puis recommencer indéfiniment.
 
-**Si tu n'as pas réussi** aucun problème, jette un oeil à [la fin du sujet ou clique ici pour voir la solution.](#via-correction---test-de-lancement)
+**Si tu n'as pas réussi** aucun problème, jette un oeil à \[la fin du sujet ou clique ici pour voir la solution.]\(#via-correction---test-de-lancement)
 ```
 
-### Thermometer
+### Appendices - Thermometer
 
 ```md
 ## III. Les capteurs
@@ -738,7 +741,7 @@ Essayons maintenant de faire fonctionner le thermomètre :
 
     Dans tous les cas, tu peux tester si ça marche en soufflant dessus, en la mettant dehors, en la rapprochant d'un radiateur, etc.
 
-**Si tu n'as pas réussi** aucun problème, jette un oeil à [la fin du sujet ou clique ici pour voir la solution.](#vib-correction---thermomètre)
+**Si tu n'as pas réussi** aucun problème, jette un oeil à \[la fin du sujet ou clique ici pour voir la solution.]\(#vib-correction---thermomètre)
 
 #### III.A.2. Mais quel intérêt de connaître la température ?
 
@@ -749,10 +752,10 @@ Connaitre la température a plusieurs intérêts :
 - Le second intérêt est de mettre en évidence des zones à fortes différences de température, identifiant les différents fronts des perturbations.
 - Le troisième intérêt plus utile pour nous est d'identifier les zones favorables aux orages caractérisées par de l'air chaud en bas et de l'air froid en altitude.
 
-[Pour en savoir plus, Météo France a une petite page explicative, clique ici](https://meteofrance.com/comprendre-la-meteo/temperatures/quest-ce-que-la-temperature).
+\[Pour en savoir plus, Météo France a une petite page explicative, clique ici]\(https://meteofrance.com/comprendre-la-meteo/temperatures/quest-ce-que-la-temperature).
 ```
 
-### Pressure Sensor
+### Appendices - Pressure Sensor
 
 ```md
 ### III.B. Pression (SEED)
@@ -768,9 +771,9 @@ Commençons par afficher la pression capturée par le capteur de la carte :
 3. Faire en sorte que la valeur se mette à jour régulièrement.
 
 > As-tu remarqué que la valeur ne change pas beaucoup ?
-> Des explications sont présentes un [peu plus loin](#iiib2-mais-la-pression-quest-ce-que-cest-) pour t'expliquer pourquoi.
+> Des explications sont présentes un \[peu plus loin]\(#iiib2-mais-la-pression-quest-ce-que-cest-) pour t'expliquer pourquoi.
 
-**Si tu n'as pas réussi** aucun problème, jette un oeil à [la fin du sujet ou clique ici pour voir la solution.](#vic1-correction---pression---affichage-de-la-valeur)
+**Si tu n'as pas réussi** aucun problème, jette un oeil à \[la fin du sujet ou clique ici pour voir la solution.]\(#vic1-correction---pression---affichage-de-la-valeur)
 
 ##### III.B.1.b. La précision de pression (pressure range en anglais)
 
@@ -778,7 +781,7 @@ Commençons par afficher la pression capturée par le capteur de la carte :
 
     TODO : exercice de manipulation de la pressure range.
 
-**Si tu n'as pas réussi** aucun problème, jette un oeil à [la fin du sujet ou clique ici pour voir la solution.](#vic2-correction---pression---la-précision)
+**Si tu n'as pas réussi** aucun problème, jette un oeil à \[la fin du sujet ou clique ici pour voir la solution.]\(#vic2-correction---pression---la-précision)
 
 #### III.B.2. Mais la pression qu'est ce que c'est ?
 
@@ -788,7 +791,7 @@ La pression atmosphérique évolue lorsque l'on monte en altitude, au niveau de 
 
 Les ballons-sondes volent aux alentours de 25km d'altitude, à cette hauteur, la pression est d'environ 25 hPa (hectoPascals).
 
-[Pour en savoir plus, Météo France a une petite page explicative, clique ici](https://meteofrance.com/actualites-et-dossiers/comprendre-la-meteo/quest-ce-que-la-pression-atmospherique).
+\[Pour en savoir plus, Météo France a une petite page explicative, clique ici]\(https://meteofrance.com/actualites-et-dossiers/comprendre-la-meteo/quest-ce-que-la-pression-atmospherique).
 
 #### III.B.3. La pression à quoi ça sert ?
 
@@ -799,7 +802,7 @@ Mais les valeurs ne sont pas la seule donnée leurs variations ont également un
 Enfin ça c'est pour faire simple car le temps est quelque chose de complexe, l'important c'est d'avoir des données de façon constante afin de pouvoir faire des analyses et continuellement apprendre et se corriger.
 ```
 
-### Humidity Sensor
+### Appendices - Humidity Sensor
 
 ```md
 ### III.C. Humidité (SEED)
@@ -816,7 +819,7 @@ Commençons une fois de plus par afficher la valeur du capteur d'humidité, n'h�
 
 > Tu peux essayer de souffler sur le capteur ou la carte pour augmenter l'humidité, tu peux aussi couvrir la carte avec ta main.
 
-**Si tu n'as pas réussi** aucun problème, jette un oeil à [la fin du sujet ou clique ici pour voir la solution.](#vid1-correction---humidité---affichage-de-la-valeur)
+**Si tu n'as pas réussi** aucun problème, jette un oeil à \[la fin du sujet ou clique ici pour voir la solution.]\(#vid1-correction---humidité---affichage-de-la-valeur)
 
 ##### III.C.1.b. Fonction d'affichage de barre
 
@@ -828,7 +831,7 @@ Cette fois, allons un peu plus loin, essaies d'afficher l'humidité sous la form
 > Dans le cas d'une barre, tu possèdes donc 5 LEDs de longueur, donc 6 valeurs possibles (en comptant 0).
 > Dans le cas d'un nombre de LEDs, tu possèdes 25 LEDs sur la Micro:bit, donc 26 valeurs possibles (en comptant 0).
 
-**Si tu n'as pas réussi** aucun problème, jette un oeil à [la fin du sujet ou clique ici pour voir la solution.](#vid2-correction---humidité---fonction-daffichage-en-barre)
+**Si tu n'as pas réussi** aucun problème, jette un oeil à \[la fin du sujet ou clique ici pour voir la solution.]\(#vid2-correction---humidité---fonction-daffichage-en-barre)
 
 #### III.C.2. L'humidité, ça sert à quoi ?
 
@@ -839,10 +842,10 @@ Pour commencer l'humidité est mesurée sous deux formes en météorologie :
 
 En météorologie, l'humidité est l'un des éléments utilisés pour donner des températures ressenties mais elle donne beaucoup d'autres informations comme la présence de nuages, les chances de précipitations (pluies), de brume et de brouillard. C'est un paramètre important qui fait partie d'un tout avec la pression et la température afin de prévoir la météo.
 
-[Pour en savoir plus, Météo France a une petite page explicative, clique ici](https://meteofrance.com/actualites-et-dossiers/comprendre-la-meteo/quest-ce-que-lhumidite).
+\[Pour en savoir plus, Météo France a une petite page explicative, clique ici]\(https://meteofrance.com/actualites-et-dossiers/comprendre-la-meteo/quest-ce-que-lhumidite).
 ```
 
-### GPS
+### Appendices - GPS
 
 ```md
 ### III.D. GPS
@@ -861,7 +864,7 @@ Avant d'utiliser les objets `Map` qui sont plus compliqués, essayons d'afficher
 3. Faire en sorte que la valeur s'actualise.
 4. Se déplacer avec la carte (sur plusieurs mètres) et vérifier que les coordonnées affichées changent.
 
-**Si tu n'as pas réussi** aucun problème, jette un oeil à [la fin du sujet ou clique ici pour voir la solution.](#vie1-correction---gps---afficher-les-coordonnées)
+**Si tu n'as pas réussi** aucun problème, jette un oeil à \[la fin du sujet ou clique ici pour voir la solution.]\(#vie1-correction---gps---afficher-les-coordonnées)
 
 #### III.D.2. Utiliser une carte
 
@@ -873,10 +876,10 @@ Maintenant que tu sais utiliser une localisation GPS, nous allons explorer l'obj
 4. Déplacer la zone d'affichage de la carte (L'ancre de la carte est le point à partir duquel la carte est affichée, la carte affiche uniquement une zone de 5*5 cellules même si elle a plus de cellules remplies).
 5. Afficher de nouveau la carte & constater que les points se sont déplacer ou que de nouveaux sont apparus.
 
-**Si tu n'as pas réussi** aucun problème, jette un oeil à [la fin du sujet ou clique ici pour voir la solution.](#vie1-correction---gps---utiliser-une-carte)
+**Si tu n'as pas réussi** aucun problème, jette un oeil à \[la fin du sujet ou clique ici pour voir la solution.]\(#vie1-correction---gps---utiliser-une-carte)
 ```
 
-### LoRa
+### Appendices - LoRa
 
 ```md
 ## IV. Communication LoRa
@@ -896,7 +899,7 @@ Maintenant que tu sais utiliser une localisation GPS, nous allons explorer l'obj
 - Accompagnement des élèves à travers la fusion de tout ce qui a été vu précédemment dans l'objectif de former un ballon météorologique utilisable.
 ```
 
-### Corrections
+### Appendices - Corrections
 
 ```md
 ## VI. Corrections
@@ -911,29 +914,29 @@ Pour cette correction, nous avons choisi d'allumer la LED en haut à gauche de l
 
 #### VI.A.1. Correction - Test de lancement - Mode Blocs
 
-![correction test de lancement en mode blocs](./images/sol_test-lancement.png)
+\!\[correction test de lancement en mode blocs]\(./images/sol_test-lancement.png)
 
 #### VI.A.2. Correction - Test de lancement - Mode JavaScript (code)
 
-Version utilisant `toggle`
+Version utilisant \`toggle\`
 
-```js
+\`\`\`js
 basic.forever(function () {
     led.toggle(0, 0)
     basic.pause(500)
 })
-```
+\`\`\`
 
-Version utilisant `plot` et `unplot`
+Version utilisant \`plot\` et \`unplot\`
 
-```js
+\`\`\`js
 basic.forever(function () {
     led.plot(0, 0)
     basic.pause(500)
     led.unplot(0, 0)
     basic.pause(500)
 })
-```
+\`\`\`
 
 ### VI.B. Correction - Thermomètre
 
@@ -941,16 +944,16 @@ Pour cette correction, nous avons choisi d'attendre 1 seconde entre chaque mesur
 
 > Mode Blocs
 
-![correction utilisation du thermomètre en mode blocs](./images/sol_util-thermo.png)
+\!\[correction utilisation du thermomètre en mode blocs]\(./images/sol_util-thermo.png)
 
 > Mode JavaScript (code)
 
-```js
+\`\`\`js
 basic.forever(function () {
     basic.showNumber(input.temperature())
     basic.pause(1000)
 })
-```
+\`\`\`
 
 ### VI.C. Correction - Pression
 
