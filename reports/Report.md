@@ -69,90 +69,73 @@ This description ultimately serves to fulfill the need to introduce middle schoo
 >
 > - in the `Appendices` section of this document
 > - on github : <https://github.com/Robin-Courault/pxt-kit-pedagogique-iot-meteo/tree/main>
+>   - check each branch
+
+La gestion de projet s'est orientée vers les objectifs suivants :
+
+- faire la majeure partie du travail lors des séances réservées dans l'emploi du temps
+- maitrise de toutes les parties du projet par toute l'équipe
+- égalisation des compétences de l'équipe pour faire en sorte que toute l'équipe atteigne un niveau commun.
 
 ### 3.1. Management Methods
 
-#### 3.1.1. Type of Management
+Pour la gestion de projet, nous avons choisi de suivre une méthode agile, un cycle itératif. Toutes les 2 semaines environ, des modifications dans les exigences et de nouvelles découvertes entrainent de nouveaux cycles. Tout au long du projet, des parties de livrables ont été régulièrement déployables. De plus, nous avons intégré notre cliente potentielle dans la démarche projet, peut-être un peu trop tardivement. Cependant notre maître d'ouvrage était intégré dès le début et l'a été tout au long du projet.
 
-> aimed for agile (but in the end, no progressive versions, not enough contact with user)
-> organised in tasks of different sizes (some bigger than they should for agile)
-> everyday: deciding what to do next, who does what, then checking up on the other +- every hour
+Chaque séance de travail débutait par une petite réunion sur le travail de la dernière séance, un petit récapitulatif du travail restant puis la répartition du travail pour la séance. Cette répartition se faisait en discussion à l'amiable mais en règle générale, les membres ayant quelque chose à terminer, continuait sur leur travail. Pour les autres cas, chacun choisissait ce qu'il souhaitait parmi le travail restant à faire, il arrivait également régulièrement que l'un des membres de l'équipe demande à l'autre de continuer ou reprendre son travail afin d'avoir une autre vision.
 
-> Between Agile, many independants tasks & substasks with multiple iterations, daily meetings, each task follow a circular process of design, implementation & test with each circle which provide a usable part.
+Cette organisation nous a permis de garantir nos objectifs de maitrise globale du projet et d'égalisation des compétences grâce au fait que chaque partie du projet pouvait avancer et développer ses compétences sur la tâche de son choix. L'excellente motivation de l'équipe projet a permis de faire fonctionner cette méthode sur les premières semaines du projet, cependant à mesure que le projet avance, la motivation de l'équipe a diminué et ce n'est que la volonté de terminer qui a maintenu le fonctionnement de cette méthode d'organisation. La faible taille de l'équipe a également contribué au fonctionnement de cette méthode.
 
-#### 3.1.2. Tools used
+Tout le travail restant à faire a été géré grâce à l'outil `Jira`, nous permettant de maintenir un suivi des différentes tâches et sous-tâches à réaliser, l'ensemble des tâches a été réalisé et actualisé en parallèle des mouvements du cahier des charges. Nous avons choisi `Jira` car un membre de l'équipe connaissait déjà l'outil, et qu'il permettait d'avoir un tableau des tâches, sous-tâche ainsi qu'un planning ordonné prenant un aspect proche d'un diagramme de Gantt. A posteriori, l'outil était bien trop lourd, l'un des membres du projet mettant parfois quasiment une minute à charger chaque page de l'outil, les modifications s'appliquaient avec des délais d'une dizaine de secondes et le nombre de clics à effectuer pour modifier une sous-tâche était bien trop important (de l'ordre de 4 ou 5, avec certains boutons perdus dans une interface extrêmement riche), de plus, l'outil étant très complet, la complexité d'utilisation a été un frein. `Jira` emportait également trop de composants pour la taille de notre projet, nous n'avons utilisé que le `board`, la `timeline` et la `list` sur les plus de 14 composants de l'outil. Le choix d'un outil plus simple et plus léger aurait été d'avantage pertinent.
 
-> Jira
-> Git, Github
-> Discord
-> Text Editor & VSCode
+Pour ce qui est des autres outils utilisés, du côté des environnement pour le développement, `VSCode` et `neovim` ont été utilisés, pour `VSCode`, l'intérêt était un excellent support et des extensions pour le développement (complétion, coloration) pour `TypeScript`, dont nous reparlerons plus tard, comme les deux viennent de `Microsoft`. De plus `VSCode` était maitrisé par une partie de l'équipe et était capable d'être utilisé sur les autres types de documents manipulés grâce à ses extensions, facilitant ainsi l'écriture des fichiers `Markdown`, la lecture des PDFs, des images et du JSON depuis le même outil. Pour `neovim`, il a été utilisé car l'autre partie de l'équipe ne souhaitait pas utiliser d'IDE (Integrated Development Environment) à client lourd ayant un ordinateur avec peu de performances, connaissait d'avantage cet outil. L'interface `Playground` en ligne de `Microsoft MakeCode` a également été beaucoup utilisé notamment pour tester les effets du code et son fonctionnement sur l'interface `MakeCode` et sur la carte `Micro:bit`, les tests via l'interface `MakeCode` directement étant plutôt lourds puisque nécessitant une installation locale (de plusieurs Giga octets). Cette interface `Playground` est également utile pour développer puisqu'elle embarque un éditeur avec de l'auto-complétion `TypeScript` mais également sur les bibliothèques spécifiques à `MakeCode` et à la carte `Micro:bit`.
 
-### 3.2. Project Analysis
+Pour continuer sur les outils de code, nous avons utilisé `Git` et notamment les dépôts `github`, tout d'abord car `Git` est le seul outil de versioning que nous connaissions et maitrisions. Le versioning étant nécessaire dans tout projet pour garantir d'être capable de maintenir un arbre de l'évolution des versions d'un projet et être capable de revenir à une version antérieure en cas de problème. `Github` nous a été imposé pour la création d'une extension pour `Microsoft MakeCode`, ce dernier n'acceptant que les dépôts `github` pour importer des extensions. `MakeCode` quant à lui, a été la destination imposé par notre maitre d'oeuvre et d'ouvrage monsieur DONSEZ pour l'extension car c'est celle que le client utilisait ou souhaitait. L'utilisation de `MakeCode` a également imposé l'utilisation du langage `TypeScript` pour écrire l'extension, étant le seul langage réellement accepté malgré des méthodes existantes pour utiliser du `C++` mais ces dernières sont très mal documentées.
 
-#### 3.2.1. Project Subject, Goals & Context
+Continuons avec le matériel, du côté de la carte et des différents capteurs, notre maitre d'ouvrage nous a imposé le choix de la `Micro:bit V2` pour la carte, ce qui ne nous semble pas particulièrement judicieux du point de vue développement, de part l'absence de bibliothèques pour utiliser la totalité des modules matériels nous ayant été fournis, cependant la carte a les avantages d'être peu onéreuse (~20€) et d'avoir plusieurs interfaces no-code, elle est donc adapté à une utilisation en collège et donc au besoin identifié pour le projet. Pour les capteurs et émetteurs, au vu du nombre de modules existants et du temps imparti, il nous a été appréciable de ne pas avoir à choisir par nous même, les modules étaient plutôt bien documentés puisque nous avons trouvé rapidement les documentations nécessaires lorsque nous savions quoi chercher.
 
-> Initial description of our project
+Pour terminer sur les outils, la communication a été effectuée à l'oral en présentiel, via `Discord` ou via les `SMS`, le premier étant le plus simple et le plus direct, les deux autres paliant les moments à distance. Le `SMS` a été choisi car plus rapide, l'un des membres de l'équipe n'ayant pas de `Smartphone`, les SMS étaient appropriés lors d'échanges demandant une faible latence, comme la communication organisationnelle, à savoir les problèmes d'emploi du temps ou les impossibilités de présence par exemple. `Discord` a été choisi pour le reste de la communication à distance, déjà utilisé dans les communications étudiantes dans la classe, toute l'équipe en avait la maitrise et possédait un compte, de plus, il est bien plus aisé de lire de gros textes sur un ordinateur que sur un téléphone (`Discord` permettant les deux). Les `emails` ont également été utilisés, surtout pour communiquer avec les autres parties prenantes car nous ne possédions leur contact que sur ce canal pour certains, cela permettait d'informer toutes les parties prenantes quand cela était nécessaire.
+Aucun des outils utilisé pour la communication ne garantissait réellement la confidentialité des échanges, cela n'était cependant pas un problème puisque le projet n'avait pas de contrainte de confidentialité.
 
-> Specifications (cahier des charges), with our differents versions
+### 3.2. Risks Analysis & Planning
 
-#### 3.2.2. Stakeholders (parties prenantes)
+Voici ci-dessous le diagramme de Gantt de notre projet, c'est un Gantt qui contient le Gantt originel sur lequel nous avons ajouté le Gantt de fin de projet. Les éléments rayés avec un gris sombre représentent les parties que nous avons annulés, les parties encadrées de vert sont quant à elles les parties terminées que nous avons conservé dans notre objectif de rendu final, après les nombreuses péripéties auxquelles nous avons fait face, notamment l'absence de certains modules initialements prévus ou l'impossibilité temporelle d'effectuer certaines tâches. La partie bleue (non rayée) des tâches représente la partie terminée des tâches.
 
-> Our main interlocutor (client's representative), and our supervisor: DONSEZ Didier
+On peut voir que nous avons dû éliminer de nombreuses parties initialement prévues, notamment une bonne partie du sujet que nous avions rédigée, n'a finalement pas été conservée, nous entendons ici par "conservée", que c'est une partie qui a été finie mais qui ne sera pas utile puisqu'elle concerne des parties sur des capteurs que nous n'avons pas obtenu qui sortent donc du contexte du projet. On peut notamment voir les capteurs d'humidité et de pression, dont la partie d'implémentation a également été annulée pour cette raison. L'implémentation du `LoRa` a été annulée surtout par manque de temps mais également car des membres d'un autre groupe plus spécialisés que nous sur l'aspect électronique embarqué n'ont pas réussi à faire fonctionner le `LoRa` sur la `Micro:bit` malgré plus de temps, de compétences et de moyens humains que notre groupe. La partie concernant le ballon météo a été annulé surtout par manque de temps mais également en conséquence aux autres annulations, un ballon météo capable seulement de mesurer la température et de se localiser n'est pas vraiment complet.
 
-> A potential client : HARDY Christel (viewed as a validator for us)
+![Figure 2: Gantt Chart with cancelled tasks](Gantt_en.png "Figure 2: Gantt Chart with cancelled tasks")
 
-> JEAN Sébastien as facilitator/mediator with our potential client
+Ceci illustre parfaitement les nombreux aléas auxquels nous avons fait face et nos difficultés à obtenir un projet clair.
+Ce diagramme de Gantt illustre également parfaitement le fait que nous n'ayons pas identifié de nombreux risques ou que nous n'avons pas bien évalué leur probabilité ou l'impact qu'ils pouvaient avoir sur le projet. Mais nous allons le voir plus en détails dans très peu de temps en parlant de notre analyse des risques.
 
-> Microsoft as MakeCode provider
+**Risques identifiés au départ :**
 
-#### 3.2.3. Risks Analysis
+- **A.** Arrivée tardive de la carte => **Acceptation**, c'est un risque important mais contre lequel on ne peut pas vraiment faire quelque chose dans le contexte de ce projet. Cela nous empêcherait de faire des tests aussi bien sur la carte que sur les modules. On connait tout de même la carte avant de la recevoir.
+- **B.** Arrivée tardive des modules => **Réduction**, risque important car empêchant de faire les drivers (car aucune idée du modèle pour certains modules) et les tests, nous avons réduit l'impact en anticipant la conception afin de ne pas retarder l'ensemble du projet si le risque se transformait en certitude.
+- **C.** Objectifs et définition du projet imprécise => **Réduction** (de l'impact), par l'intégration de validations et révisions régulières du cahier des charges dans l'organisation. Ce risque, si il se réalise, peut provoquer des changements importants et nous faire perdre du temps en nous obligeant à jeter du travail réalisé.
+- **D.** Contraintes dans le matériel et le développement trop fortes => **Acceptation**, risque de mauvais choix pour coller aux contraintes et d'un développement trop complexifié. Accepté car c'est quelque chose pour lequel nous n'avions aucun poids de décision.
+- **E.** Manque de compétence de l'équipe => **Acceptation** (Provisionnement), c'est un risque accepté en choisissant de réserver du temps pour la montée en compétence.
 
-> Initial Risks Analysis (too short) and solutions expected
+![Figure 3: Risks Matrix en début de projet](MatriceCriticiteRisques.png "Figure 3: Risks Matrix en début de projet")
 
-> Evolution during the project & impacts
+**Réévaluation des risques en fin de projet et nouveaux risques :**
 
-#### 3.2.4. Quality Management
+- F. Contraintes des utilisateurs finaux divergents des contraintes données par le maitre d'ouvrage et d'oeuvre => **Evitement** (ou a minima **Réduction**) en communiquant et intégrant d'avantage les utilisateurs finaux en l'occurence ici, Christel HARDY, au projet.
+- G. Non Fonctionnement d'un module sur notre carte (Micro:Bit) => **Evitement** en changeant de module ou de carte. Ou en retirant ce module du cahier des charges dans le pire des cas. Ou encore **Réduction** en sélectionnant une carte ayant d'avantages de support et de bibliothèques matérielles.
+- H. Non arrivée des modules prévus => **Acceptation** car peu de chance que cela arrive, mais très problèmatique car éventuellement perte de temps en jetant du travail déjà réalisé.
 
-> Criterias:
-> > Each captor has his expected blocks in MakeCode extension
-> > Each captor has an introduction part in the instructions sheet
-> > Weather balloon part in the instructions sheet
-> > \+ relevance (blocks & instructions sheet)
-> > \+ operation (blocks)
-> > \+ clear & informative (instructions sheet)
+![Figure 4: Risks Matrix en fin de projet](MatriceCriticiteRisquesPostProjet.png "Figure 4: Risks Matrix en fin de projet")
 
-### 3.3. Planning
+Comme on peut le voir, plusieurs risques imprévus en début de projet se révèlent critiques si ils se réalisent, problème étant qu'ils sont arrivés sans que nous ayons anticipé des stratégies de mitigation. Trois des cinq risques initiaux se sont révélés plus impactant que prévu ce qui nous a également porté préjudice.
 
-> Skills & Motivations matrix
-> Tasks chart
-> GANTT chart
-> > cost-delay-quality triangle
+### 3.3. Financial Assessment
 
-### 3.4. Final Analysis
+Ce projet s'est déroulé avec peu de moyens, mais suffisant sauf au niveau du temps, nous avions : 
+- 2 ordinateurs portables
+- 2 Micro:bit V2
+- 1 module GPS XA1110
+- 2 émetteurs/récepteurs LoRa, Wio-SX1262
+- 2 étudiants (Robin COURAULT & Sophie HAUGUEL) durant approximativement 50h, soit une centaine d'heures de travail humain.
 
-#### 3.4.1. Impacts
-
-> In prevision, can learn to college students how a weather balloon works and understand the quantity of different use the IoT have => Education Impact + Can be funny
-
-#### 3.4.2. Financial Assessment
-
-> Two computers
-> Two Micro:bit V2 boards & one SEED board
-> One XA1110 (GPS module)
-> Two LoRa emitters (but just one assembled)
-> Two students (Sophie & Robin) during ~50 hours (100 hours of work for one people)
-
-#### 3.4.3. Deliverables
-
-> Expected:
-> > One Instructions Sheet (with details on each part)
-> > One Micro:bit Extension for Microsoft MakeCode (with each block & functions expected)
-> > A report
-
-> Finish:
-> > One Instructions Sheet (with details on what part is done and not ended parts)
-> > One Micro:bit Extension for Microsoft MakeCode (with each block implemented)
-> > This report, witness of our difficulties
 
 `\newpage{}`{=latex}
 
@@ -579,6 +562,26 @@ There we go; thanks to all of this, the GPS module has what it needs to function
 > > Make a library to use LoRa emitter.
 > > End the micro-library for GPS XA1110.
 > > Complete the Instructions Sheet with a tutorial to create a weather balloon, the part to learn how to use GPS, the part on the LoRa emitter and answers for each new part.
+
+#### 3.4.2. 
+
+#### 3.4.3. Deliverables
+
+> Expected:
+> > One Instructions Sheet (with details on each part)
+> > One Micro:bit Extension for Microsoft MakeCode (with each block & functions expected)
+> > A report
+
+> Finish:
+> > One Instructions Sheet (with details on what part is done and not ended parts)
+> > One Micro:bit Extension for Microsoft MakeCode (with each block implemented)
+> > This report, witness of our difficulties
+
+#### 3.4.1. Impacts
+
+> In prevision, can learn to college students how a weather balloon works and understand the quantity of different use the IoT have => Education Impact + Can be funny
+
+Finalement pour conclure cette partie 
 
 `\newpage{}`{=latex}
 
