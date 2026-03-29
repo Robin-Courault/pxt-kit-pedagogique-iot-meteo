@@ -1,10 +1,11 @@
 ---
 title: "Project Report"
-subtitle: "10 - kit to discover IoT with college students"
+subtitle: |
+  10 - kit to discover IoT with college students
+  INFO 4th year | 2025-2026 | Polytech Grenoble
+  Supervisor: DONSEZ Didier
+  Redaction Date: 26/03/2026
 author: COURAULT Robin, HAUGUEL Sophie
-subtitle: "INFO 4th year | 2025-2026 | Polytech Grenoble"
-subtitle: "Supervisor: DONSEZ Didier"
-subtitle: "Redaction Date: 26/03/2026"
 output: pdf_document
 fontsize: 12pt
 numbersections: true
@@ -21,11 +22,11 @@ header-includes: |
 
 `\newpage{}`{=latex}
 
-## 1. Abstract
+# Abstract
 
 `\newpage{}`{=latex}
 
-## 2. Introduction
+# Introduction
 
 This project is a final 4th-year project for computer science engineering students at Polytech Grenoble. It takes place alongside other courses and an internship search that can prove to be stressful. The project is therefore set within an educational yet realistic context, with the aim of creating a situation representative of a corporate project.
 
@@ -63,7 +64,7 @@ This description ultimately serves to fulfill the need to introduce middle schoo
 
 `\newpage{}`{=latex}
 
-## 3. Project Management
+# Project Management
 
 > Where to find the ressources:
 >
@@ -77,7 +78,7 @@ Project management focused on the following objectives:
 - ensuring all parts of the project are mastered by the entire team
 - leveling up the team's skills to ensure everyone reaches a common level of proficiency.
 
-### 3.1. Management Methods
+## Management Methods
 
 For project management, we chose to follow an agile method based on an iterative cycle. Approximately every two weeks, changes in requirements and new discoveries led to new cycles. Throughout the project, parts of the deliverables were regularly deployable. Additionally, we integrated our potential client into the project process, though perhaps a bit too late. However, our project owner was integrated from the start and remained so throughout the project.
 
@@ -96,7 +97,7 @@ Moving on to hardware, regarding the board and various sensors, our project owne
 Finally, regarding tools, communication was conducted orally in person, via `Discord`, or via `SMS`. The former was the simplest and most direct, while the other two covered remote moments. `SMS` was chosen because it is faster; as one team member did not have a smartphone, SMS was appropriate for low-latency exchanges, such as organizational communication (e.g., scheduling issues or absences). `Discord` was chosen for the rest of the remote communication; already used for student communications in the class, the entire team mastered it and had an account. Furthermore, it is much easier to read large texts on a computer than on a phone (`Discord` allows for both). `Emails` were also used, mainly to communicate with other stakeholders as we only had their contact info via this channel; this allowed us to inform all parties when necessary.
 None of the tools used for communication truly guaranteed the confidentiality of exchanges; however, this was not an issue as the project had no confidentiality constraints.
 
-### 3.2. Risks Analysis & Planning
+## Risks Analysis & Planning
 
 Below is the Gantt chart for our project. This chart contains the original Gantt onto which we have overlaid the end-of-project Gantt. Elements crossed out in dark gray represent parts we cancelled; parts framed in green are the completed parts we kept for our final submission goal, following the many setbacks we faced—notably the absence of certain modules initially planned or the lack of time to perform certain tasks. The blue (not crossed out) section of the tasks represents the completed portion of those tasks.
 
@@ -126,7 +127,7 @@ This perfectly illustrates the many hazards we faced and our difficulties in ach
 
 As can be seen, several risks unforeseen at the start of the project proved critical when realized. The problem was that they occurred without us having anticipated mitigation strategies. Three of the five initial risks proved more impactful than expected, which also worked to our detriment.
 
-### 3.3. Financial Assessment
+## Financial Assessment
 
 This project was carried out with limited resources, though they were sufficient except regarding time. we had:
 - 2 laptops
@@ -137,9 +138,9 @@ This project was carried out with limited resources, though they were sufficient
 
 `\newpage{}`{=latex}
 
-## 4. Technical Work
+# Technical Work
 
-### 4.1. Instructions Sheet
+## Instructions Sheet
 
 > See branch `sujet`, file `sujet/sujet.md`.
 
@@ -163,17 +164,17 @@ In total, 4 parts were written: `Thermometer`, `Pressure`, `Humidity`, and `GPS`
 
 > see in [Appendices](#62-instructions-sheet), each part of the instructions sheet.
 
-### 4.2. Code
+## Code
 
 > See branch `code`, file `main.ts`.
 
 > The `//%` annotations in the code are used by MakeCode to generate blocks and categories in the interface.
 
-#### 4.2.1. Blocks
+### Blocks
 
 > It should be noted that we are speaking here only of the methods and functions usable via the MakeCode interface in the form of blocks; we are not speaking of the additional code necessary to make them function.
 
-##### 4.2.1.1. Pressure Sensor
+#### Pressure Sensor
 
 For the first set of blocks, we focused on the pressure sensor, which we ultimately did not obtain, but here are the planned blocks:
 
@@ -182,7 +183,7 @@ For the first set of blocks, we focused on the pressure sensor, which we ultimat
 
 > Having not obtained the pressure sensor, these blocks were not implemented.
 
-##### 4.2.1.2. Humidity Sensor
+#### Humidity Sensor
 
 For the second set of blocks, we addressed the humidity sensor:
 
@@ -191,7 +192,7 @@ For the second set of blocks, we addressed the humidity sensor:
 
 > Having not obtained the humidity sensor, these blocks were not implemented.
 
-##### 4.2.1.3. GPS
+#### GPS
 
 For the third set of blocks, the GPS was addressed:
 
@@ -205,7 +206,7 @@ For the third set of blocks, the GPS was addressed:
     - `moveAnchor` block: allowing the anchor point to be redefined by providing an offset in grid cells from the current anchor point.
     - `setCellSize` block: allowing the size of the `Map` cells to be redefined; when at least 1 point is located in a cell, it is lit up.
 
-##### 4.2.1.4. LoRa
+#### LoRa
 
 For the final set of blocks, LoRa was addressed:
 
@@ -217,7 +218,7 @@ For the final set of blocks, LoRa was addressed:
 
 This set of blocks would have allowed us, in our opinion, to do pretty much whatever we wanted with LoRa. However, according to the group of students working on the same board as us, the LoRa transmitter was unusable on a Micro:bit. In any case, we would not have had the time to complete this part.
 
-#### 4.2.2. Map library
+### Map library
 
 The `Map` library we built contains all the blocks accessible on the MakeCode interface as well as all the functions and objects necessary for their operation.
 
@@ -363,7 +364,7 @@ As for the display block (`print`), we will not cover all of its code as it is q
 - Convert the array of pixels to be displayed into a character string according to the format expected by the MakeCode standard library function for lighting an LED array.
 - Display the portion of the `Map` by lighting the LEDs.
 
-#### 4.2.3. GPS library
+### GPS library
 
 The GPS module library includes functions for retrieving sentences from the module, parsing them, and extracting longitude and latitude values, as well as module configuration and basic blocks for MakeCode.
 
@@ -549,7 +550,7 @@ There we go; thanks to all of this, the GPS module has what it needs to function
 
 `\newpage{}`{=latex}
 
-## 5. Conclusion
+# Conclusion
 
 To finally conclude this report, let us start by recalling that nothing went as planned; the project's final deliverables do not correspond to what was initially expected. Of the 7 parts (excluding the introduction) of the practical work subject, only five (`Launch Test`, `Thermometer`, `Humidity Sensor`, `Pressure Sensor`, and `GPS`) were mostly finalized, but only two of those five are truly completed (the `Launch Test` and `Thermometer` sections). Regarding the `MakeCode` extension, only the GPS module has functional blocks; as the pressure and humidity sensors were not received and the thermometer was already integrated into `MakeCode`, `LoRa` was not implemented despite research to begin developing the driver and blocks. Furthermore, the GPS module blocks are partially functional but unusable because the GPS module resets before managing to synchronize with a satellite; consequently, the other blocks and functions using locations provided by the GPS are unusable as they are. This report is perhaps the only thing that proceeded without a hitch and thus stands as a witness to the difficulties encountered.
 
@@ -559,16 +560,16 @@ Let us close by discussing what remains to be done and the future possibilities 
 
 `\newpage{}`{=latex}
 
-## 6. Appendices
+# Appendices
 
 > All charts
 > Summary of project management meeting
 > Screenshots of MakeCode
 > Parts of Code, if required (for example if we use code out of context in the report, we can put the complete code here)
 
-### 6.1. Code
+## Code
 
-#### 6.1.1. Map - print & additionnals functions
+### Map - print & additionnals functions
 
 ```ts
 print() {
@@ -673,11 +674,11 @@ resetpixelsToTurnOn() {
 }
 ```
 
-### 6.2. Instructions sheet
+## Instructions sheet
 
 > can be finded on the [github](https://github.com/Robin-Courault/pxt-kit-pedagogique-iot-meteo/tree/main) in the folder `sujet`
 
-#### 6.2.1. Introduction
+### Introduction
 
 ```md
 # Kit pédagogique SEED micro:bit
@@ -701,7 +702,7 @@ L'objectif de ce travail pratique est de réaliser un programme capable de mesur
 **Attention :** toucher les parties métalliques de la carte pendant son fonctionnement peut l'abîmer ! De plus, la carte n'aime pas l'eau...
 ```
 
-#### 6.2.2. Test de Lancement
+### Test de Lancement
 
 ```md
 ## II. Test de lancement - Faire clignoter une LED
@@ -715,7 +716,7 @@ Pour s'assurer que tout est bien installé, commençons par un petit test :
 **Si tu n'as pas réussi** aucun problème, jette un oeil à [la fin du sujet ou clique ici pour voir la solution.](#via-correction---test-de-lancement)
 ```
 
-#### 6.2.3. Thermometer
+### Thermometer
 
 ```md
 ## III. Les capteurs
@@ -751,7 +752,7 @@ Connaitre la température a plusieurs intérêts :
 [Pour en savoir plus, Météo France a une petite page explicative, clique ici](https://meteofrance.com/comprendre-la-meteo/temperatures/quest-ce-que-la-temperature).
 ```
 
-#### 6.2.4. Pressure Sensor
+### Pressure Sensor
 
 ```md
 ### III.B. Pression (SEED)
@@ -798,7 +799,7 @@ Mais les valeurs ne sont pas la seule donnée leurs variations ont également un
 Enfin ça c'est pour faire simple car le temps est quelque chose de complexe, l'important c'est d'avoir des données de façon constante afin de pouvoir faire des analyses et continuellement apprendre et se corriger.
 ```
 
-#### 6.2.5. Humidity Sensor
+### Humidity Sensor
 
 ```md
 ### III.C. Humidité (SEED)
@@ -841,7 +842,7 @@ En météorologie, l'humidité est l'un des éléments utilisés pour donner des
 [Pour en savoir plus, Météo France a une petite page explicative, clique ici](https://meteofrance.com/actualites-et-dossiers/comprendre-la-meteo/quest-ce-que-lhumidite).
 ```
 
-#### 6.2.6. GPS
+### GPS
 
 ```md
 ### III.D. GPS
@@ -875,7 +876,7 @@ Maintenant que tu sais utiliser une localisation GPS, nous allons explorer l'obj
 **Si tu n'as pas réussi** aucun problème, jette un oeil à [la fin du sujet ou clique ici pour voir la solution.](#vie1-correction---gps---utiliser-une-carte)
 ```
 
-#### 6.2.7. LoRa
+### LoRa
 
 ```md
 ## IV. Communication LoRa
@@ -886,7 +887,7 @@ Maintenant que tu sais utiliser une localisation GPS, nous allons explorer l'obj
 - Envoi de différentes données (nécessitant test côté récepteur)
 ```
 
-#### 6.2.8. Weather balloon
+### Weather balloon
 
 ```md
 ## V. Ballon météorologique
@@ -895,7 +896,7 @@ Maintenant que tu sais utiliser une localisation GPS, nous allons explorer l'obj
 - Accompagnement des élèves à travers la fusion de tout ce qui a été vu précédemment dans l'objectif de former un ballon météorologique utilisable.
 ```
 
-#### 6.2.9. Corrections
+### Corrections
 
 ```md
 ## VI. Corrections
@@ -1028,7 +1029,7 @@ basic.forever(function () {
 
 `\newpage{}`{=latex}
 
-## 7. Bibliography
+# Bibliography
 
 > SEED's github
 > Micro:bit documentation on micro:bit v2 board
