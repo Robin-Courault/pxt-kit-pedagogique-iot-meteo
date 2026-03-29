@@ -1,6 +1,8 @@
 # Dependency directories
 node_modules/
+pxt_modules/
 
 # Other
 .pxt/
+tsconfig.json
 package-lock.json
