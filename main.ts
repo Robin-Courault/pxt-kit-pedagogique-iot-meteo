@@ -39,9 +39,144 @@ namespace inputSeed {
 
     const GPS_ADDRESS = 0x10;
     let trameBuffer : string = "";
+<<<<<<< HEAD
+=======
+    /**
+     * Lit 32 octets depuis le GPS via I2C
+     */
+    function readRawData(): string {
+        let result = "";
+        try {
+            // Lecture des octets depuis le module
+            let data = pins.i2cReadBuffer(GPS_ADDRESS, 32, false);
+
+            for (let i = 0; i < data.length; i++) {
+                let charCode = data.getNumber(NumberFormat.UInt8LE, i);
+                // Filtrer les caractères valides (ASCII imprimable)
+                if (charCode >= 32 && charCode <= 126) {
+                    result += String.fromCharCode(charCode);
+                } 
+                // CR + LF
+                else if (charCode === 13 || charCode === 10) {
+                    result += "\n";
+                }
+            }
+        } catch (e) {
+            result = "";
+        }
+        return result;
+    }
+
+    export function getAllTrames(): string[] {
+        let raw = readRawData();
+        if (raw.length === 0) return [];
+
+        trameBuffer += raw;
+
+        // Traitement des phrases complètes
+        let lines = trameBuffer.split("\n");
+
+        // Garder la dernière ligne incomplète dans le buffer
+        trameBuffer = lines[lines.length - 1];
+
+        return lines;
+    }
+
+    const GGA_LAT_POS = 2;
+    const GGA_LON_POS = 4;
+    const GGA_FIX_GPS_POS = 6;
+    /**
+     * @param trame trame GGA découpée sur les ',' et sans la partie checksum
+     * @returns null si trame vide, ou si trame n'est pas de type GGA, ou si pas de fix GPS, sinon Location avec coordonnées de la trame lue
+     */
+    export function parseTrameGGA(trame : string[]): Location | null {
+        // GP = GPS | GN = GPS + GLONASS
+        if (trame[0] == "$GPGGA" || trame[0] == "$GNGGA") {
+            basic.showNumber(8);
+            basic.pause(100);
+            basic.showNumber(0);
+            // si FIXGPS (= type de positionnement) = 0 alors pas de fix de position,
+            // on aimerait de préférence du GPS (=1) mais fondamentalement tant que c'est fixé, ça nous convient.
+            if (parseFloat(trame[GGA_FIX_GPS_POS]) > 0) {
+                let lat = nmeaToDegrees(trame[GGA_LAT_POS], trame[GGA_LAT_POS+1]);
+                let lon = nmeaToDegrees(trame[GGA_LON_POS], trame[GGA_LON_POS+1]);
+
+                return new Location(lat, lon);
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    const MTK_INIT_CMD = "$PMTK314,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*29\r\n";
+    let isStarted : boolean = false;
+    /**
+     * Check si la trame est de type MTK et si elle l'est si c'est un type startup,
+     * Si c'est le cas, initialiser le module pour qu'il transmette les trames GGA.
+     * Traitement de l'acquittement également de l'initialisation.
+     * @param trame trame MTK découpée sur les ',' et sans la partie checksum
+     * @returns true if trame is MTK, false otherwise
+     */
+    export function checkTrameMTK(trame : string[]): boolean {
+        if (trame[0].substr(0,5) == "$PMTK") {
+            switch (trame[0].substr(5)) {
+                case "010": // sys_msg
+                    // msg = startup ended
+                    if (trame[1] == "002" && !isStarted) {
+                        // setup de l'envoie des trames GGA
+                        let buf = pins.createBuffer(MTK_INIT_CMD.length);
+                        for (let i = 0; i < MTK_INIT_CMD.length; i++) {
+                            buf.setNumber(NumberFormat.UInt8LE, i, MTK_INIT_CMD.charCodeAt(i));
+                        }
+                        pins.i2cWriteBuffer(GPS_ADDRESS, buf, false);
+                        isStarted = true;
+                    }
+                    break;
+                case "001": // ack
+                    // on ne gère pas l'acquittement de notre initialisation
+                    if (trame[1] == "314" && trame[2] == "3") {}
+                default:
+                    break;
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function nmeaToDegrees(raw: string, direction: string): number {
+        if (raw.length === 0) return 0;
+
+        let dotIndex = raw.indexOf(".");
+        if (dotIndex < 2) return 0;
+
+        // sur une chaine du type "4836.5375" :
+        // les 2 chiffres avant le point et les chiffres après représentent les minutes (ici 36.5375 min)
+        // les autres chiffres représentent les degrés (ici 48°)
+        // => on ignore ce temps
+        let degStr = raw.substr(0, dotIndex - 2);
+        let minStr = raw.substr(dotIndex - 2);
+
+        let degrees = parseFloat(degStr);
+        let minutes = parseFloat(minStr);
+
+        // conversion des degrés + minutes en degrés décimaux (latitude ou longitude)
+        // 1 minute = 1/60 degrés
+        let result = degrees + minutes / 60.0;
+
+        if (direction === "S" || direction === "W") {
+            result = -result;
+        }
+        return result;
+    }
+
+>>>>>>> rapport
     /**
      * Reads 32 bytes from the GPS via I2C
      */
+<<<<<<< HEAD
     function readRawData(): string {
         let result = "";
         try {
@@ -163,6 +298,32 @@ namespace inputSeed {
             result = -result;
         }
         return result;
+=======
+    //% block="retrieve current location"
+    //% blockSetVariable=location
+    //% group="GPS"
+    export function getLocation(): Location {
+        let trames : string[];
+        let location : Location = new Location(0,0);
+        let tempLoc : Location | null;
+        
+        trames = getAllTrames();
+
+        for (let i = 0; i < trames.length - 1; i++) {
+            if (trames[i].trim().length > 0) {
+                // parse trame without checksum part (after '*')
+                tempLoc = parseTrameGGA(trames[i].trim().split('*')[0].split(','));
+
+                if (tempLoc != null) {
+                    location = tempLoc;
+                } else {
+                    checkTrameMTK(trames[i].trim().split('*')[0].split(','));
+                }
+            }
+        }
+
+        return location;
+>>>>>>> rapport
     }
 
     export class Location {
