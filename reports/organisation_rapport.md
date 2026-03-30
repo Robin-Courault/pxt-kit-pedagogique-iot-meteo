@@ -14,21 +14,21 @@
 > liste des livrables ✓
 
 3. Project Management
-> objectifs de management : travail qu'en séance + égalisation des compétences + maîtrise de toute partie du sujet par tous
+> objectifs de management : travail qu'en séance + égalisation des compétences + maîtrise de toute partie du sujet par tous ✓
 
-    3.1 Type of Management
-> comment on s'est organisés: à chaque séance + comment on prévoyait le reste du travail
-> matrice motivation/compétences
-> outils utilisés
+    3.1 Type of Management ✓
+> comment on s'est organisés: à chaque séance + comment on prévoyait le reste du travail ✓
+> matrice motivation/compétences ✓
+> outils utilisés ✓
 
-    3.2 Risks Analysis
-> gantt
-> explication du gantt avec l'analyse de risques
+    3.2 Risks Analysis ✓
+> gantt ✓
+> explication du gantt avec l'analyse de risques ✓
 
-    3.3 Management conclusions
-> points d'améliorations
-> respect ou non des objectifs
-> bilan "financier"
+    3.3 Management conclusions      >   Déplacement dans conclusions
+> points d'améliorations            >
+> respect ou non des objectifs      >
+> bilan "financier"                 ✓  Intégration en partie 3.3 indépendante
 
 4. Technical Work ✓
 > explication des choix de réalisation (SI nécessaire & pertinent!!) ✓
