@@ -28,40 +28,45 @@ This report presents a project conducted by a 4th-year computer science master s
 
 `\newpage{}`{=latex}
 
+## Glossary
+
+- **Micro:bit V2**: Microcontroller board realised by the BBC. Its goal is to facilitate IoT learning for teenagers. Many different interfaces are implemented for it. Their role is to abstract and simplify the functionning of the board.
+
+![Photo 1: Micro:Bit board](microbit.png "Photo 1: Micro:Bit board")
+
+- **SEED board**: Expansion board that allows various additional sensors to be connected to the Micro:Bit. Abstractions to simplify its usage are not already implemented.
+
+![Photo 2: SEED board](seed.jpg "Photo 2: SEED board")
+
+- **MakeCode**: One of the interfaces compatible with the Micro:Bit. It offers a simplified coding interface, as well as a block coding interface.
+
+- **Block interface / No-code interface**: This interface represents functions and variables as blocks. To code with them, the user can plug them like puzzle pieces. The result is a more visual code, with a lessened syntax barrier.
+
+![Photo 3: MakeCode block interface](MakeCode.png "Photo 3: MakeCode block interface")
+
+`\newpage{}`{=latex}
+
 # Introduction
 
-This project is a final 4th-year project for computer science engineering students at Polytech Grenoble. It takes place alongside other courses and an internship search that can prove to be stressful. The project is therefore set within an educational yet realistic context, with the aim of creating a situation representative of a corporate project.
+This project is a final 4th-year project for computer science engineering students at Polytech Grenoble. It lasted two months and took place alongside other courses. One or two afternoons were allocated to it every week. The project is therefore set within an educational yet realistic context, with the aim of creating a situation representative of a corporate project.
 
-Our subject involves creating an educational kit for teaching IoT (Internet of Things) in middle school. We are therefore targeting a level suitable for middle school students, with a pedagogical objective and a result intended for middle school teachers.
+Our subject involves creating an educational kit for teaching IoT (Internet of Things) in middle school. We are therefore targeting a level suitable for middle school students, with a pedagogical objective. The result is intended for middle school teachers, who can use it for their practical work classes.
 
-This project is supervised by Mr. Didier DONSEZ, who also represents the client, his needs, and requirements in the roles of Project Owner (PO, or MOA in french) and Project Manager (PM, or MOE in french). The project team consists of two students, Robin COURAULT and Sophie HAUGUEL, the project team has also a part of Project Manager role. After several weeks, we established contact with a potential client, an interested teacher, Mrs. Christel HARDY. At the same time, Mr. Sébastien JEAN identified himself as a facilitator/mediator for our communications with Mrs. HARDY.
+This project is supervised by Mr. Didier DONSEZ. He also represents the client, his needs, and requirements in the roles of Project Owner (PO, or MOA in french) and Project Manager (PM, or MOE in french). The development team consists of two students, Robin COURAULT and Sophie HAUGUEL. The development team is also responsible of the management of the project. After several weeks, we established contact with a potential user, an interested teacher, Mrs. Christel HARDY. At the same time, Mr. Sébastien JEAN identified himself as a facilitator for our communications with Mrs. HARDY.
 
 ![Figure 1: Project Stakeholders](Parties_prenantes.png "Figure 1: Project Stakeholders")
 
-The needs analysis proved complex due to our main contact's busy schedule. The specifications (cahier des charges) were difficult to define and stabilize; after a first version based on the single sentence serving as the project subject, we produced a second version by discussing it with Mr. DONSEZ, then adjusted it throughout the project as we progressed and asked questions. The validation of the second version of the specifications was never finalized despite our emails and verbal attempts. It was through questions and discussions that we refined the requirements.
+This educational kit contains a `Micro:bit V2` board that is plugged into the `SEED` expansion board. It aims to offer a block interface for middle schoolers to use the sensors of the `SEED` board. This was done by extending the `MakeCode` interface, although it might not be the most suitable interface for our potential user. Anyhow, the students could use the additional sensors to create a weather balloon.
 
-The second version of our specifications identifies two expected deliverables, in addition to the deliverables inherent to the educational context (report + defense): a practical work (TP in french) assignment for teachers and middle schoolers, as well as an extension for the `MakeCode` no-code programming interface. These two deliverables were intended to allow the use of additional modules added to a `Micro:bit V2` board via a `SEED` expansion board, with the goal of enabling middle schoolers to create a weather balloon.
+Thus, the subject identifies two expected deliverables:  
+- A practical work subject (TP in french) for teachers and middle schoolers
+- An extension for the `MakeCode` no-code programming interface.
 
-Thus, the practical work assignment was described in our specifications as being independent of other resources, intended for users already familiar with the `Micro:bit V2`, covering each new module useful for the weather balloon, and required to be in `Markdown` format. To suit middle school students, we agreed on a rather short format for each part of our practical work assignment, with each part consisting of:
+In addition, deliverables inherent to the educational context are also expected, such as this report or the defense.
 
-- manipulation instructions, requiring exploration and understanding;
-- a correction of the manipulations and short explanations;
-- an optional discovery lesson to explain the relevance of the section toward building a weather balloon.
+The development of the project faced many challenges, to say the least. The initial specifications had to be revised and simplified, for reasons that we will develop later on. The end goal of making a weather ballon was compromised, and we instead focused on the discovery and usage of new sensors.
 
-To cover all the modules necessary for the weather balloon while maintaining a logical and pedagogical sequence, we chose to define the following sections for the assignment:
-
-- Introduction
-- Launch test (checking if the board works)
-- Exploration of the modules with:
-  - Thermometer
-  - Accelerometer
-  - Pressure sensor
-  - Humidity sensor
-  - GPS
-  - LoRa Transmitter/Receiver
-- Development of the program for the weather balloon, also allowing for the consolidation of acquired knowledge.
-
-To complement the TP assignment, an extension for `MakeCode` was requested, which should abstract the complex hardware operation of each module. This extension is exclusively intended for the `Micro:bit V2` board.
+As a result, we implemented a `MakeCode` extension with blocks to use GPS coordinates. This includes a minimap, that enables easy and visual testing. To accompany it, we wrote a practical work subject. It focuses on trying out each sensor, and introduces the weather ballon, with corrections.
 
 This description ultimately serves to fulfill the need to introduce middle schoolers to the Internet of Things (IoT).
 
@@ -71,7 +76,6 @@ This description ultimately serves to fulfill the need to introduce middle schoo
 
 > Where to find the ressources:
 >
-> - in the `Appendices` section of this document
 > - on github : <https://github.com/Robin-Courault/pxt-kit-pedagogique-iot-meteo/tree/main>
 >   - check each branch
 
@@ -83,32 +87,25 @@ Project management focused on the following objectives:
 
 ## Management Methods
 
-For project management, we chose to follow an agile method based on an iterative cycle. Approximately every two weeks, changes in requirements and new discoveries led to new cycles. Throughout the project, parts of the deliverables were regularly deployable. Additionally, we integrated our potential client into the project process, though perhaps a bit too late. However, our project owner was integrated from the start and remained so throughout the project.
+For project management, we chose to follow an agile method based on an iterative cycle. Throughout the project, parts of the deliverables were regularly deployable. Additionally, we integrated our potential client into the project process, too late though. However, our project owner was integrated from the start and remained so throughout the project.
 
-Each work session began with a short meeting regarding the work from the previous session, a brief recap of the remaining work, and then the distribution of tasks for the session. This distribution was handled through amicable discussion, but as a general rule, members who had a task to finish continued their work. In other cases, everyone chose what they wanted from the remaining tasks; it also frequently happened that one team member would ask another to continue or take over their work to provide a fresh perspective.
+Each work session began with a short meeting regarding the work from the previous session, a brief recap of the remaining work, and then the distribution of tasks for the session. As a general rule, members who had a task to finish continued their work. In other cases, everyone chose what they wanted from the remaining tasks. It also frequently happened that one team member would ask another to continue or take over their work to provide a fresh perspective.
 
 This organization allowed us to guarantee our objectives of global project mastery and skills leveling, as each part of the project could progress and develop skills on the task of their choice. The project team's excellent motivation allowed this method to work during the first few weeks of the project; however, as the project progressed, team motivation decreased, and it was only the will to finish that maintained the functionality of this organizational method. The small size of the team also contributed to the success of this approach.
 
-All remaining work was managed using the `Jira` tool, allowing us to maintain tracking of the various tasks and sub-tasks to be completed; all tasks were carried out and updated in parallel with shifts in the specifications. We chose `Jira` because one team member was already familiar with the tool, and it provided a board for tasks and sub-tasks as well as an ordered schedule similar to a Gantt chart. In hindsight, the tool was far too heavy: one project member sometimes took nearly a minute to load each page, changes were applied with delays of about ten seconds, and the number of clicks required to modify a sub-task was far too high (around 4 or 5, with some buttons lost in an extremely dense interface). Furthermore, as the tool is very comprehensive, its complexity was a hindrance. `Jira` also included too many components for the scale of our project; we only used the `board`, `timeline`, and `list` out of the more than 14 available components. Choosing a simpler, lighter tool would have been more relevant.
-
-Regarding other tools used, for the development environments, `VSCode` and `neovim` were employed. For `VSCode`, the interest lay in its excellent support and extensions for development (completion, syntax highlighting) for `TypeScript`—which we will discuss later—as both come from `Microsoft`. Additionally, `VSCode` was mastered by part of the team and could be used for other types of documents thanks to its extensions, facilitating the writing of `Markdown` files and the reading of PDFs, images, and JSON within the same tool. `neovim` was used because the other part of the team did not want to use a heavyweight IDE (Integrated Development Environment) on a low-performance computer and was more familiar with this tool. The online `Playground` interface from `Microsoft MakeCode` was also used extensively, notably to test code effects and functionality on the `MakeCode` interface and the `Micro:bit` board; testing via the direct `MakeCode` interface was quite heavy as it required a local installation (of several gigabytes). This `Playground` interface is also useful for development as it includes an editor with `TypeScript` auto-completion, as well as for libraries specific to `MakeCode` and the `Micro:bit`.
-
-To continue with coding tools, we used `Git` and specifically `GitHub` repositories—primarily because `Git` is the only versioning tool we knew and mastered. Versioning is necessary in any project to ensure the ability to maintain a history of project versions and to be able to revert to a previous version in case of problems. `GitHub` was required for the creation of a `Microsoft MakeCode` extension, as the latter only accepts `GitHub` repositories for importing extensions. `MakeCode` itself was the destination imposed by our project manager and owner, Mr. DONSEZ, for the extension because it was the one the client used or desired. Using `MakeCode` also dictated the use of the `TypeScript` language to write the extension, as it is the only truly accepted language despite existing methods for using `C++`, which are very poorly documented.
-
-Moving on to hardware, regarding the board and various sensors, our project owner imposed the choice of the `Micro:bit V2`. This did not seem particularly wise from a development perspective due to the lack of libraries for utilizing all the hardware modules provided to us. However, the board has the advantages of being inexpensive (~€20) and having several no-code interfaces; it is therefore suited for middle school use and thus for the needs identified for the project. For the sensors and transmitters, given the number of existing modules and the time allotted, we appreciated not having to choose them ourselves; the modules were quite well-documented, as we quickly found the necessary documentation once we knew what to look for.
-
-Finally, regarding tools, communication was conducted orally in person, via `Discord`, or via `SMS`. The former was the simplest and most direct, while the other two covered remote moments. `SMS` was chosen because it is faster; as one team member did not have a smartphone, SMS was appropriate for low-latency exchanges, such as organizational communication (e.g., scheduling issues or absences). `Discord` was chosen for the rest of the remote communication; already used for student communications in the class, the entire team mastered it and had an account. Furthermore, it is much easier to read large texts on a computer than on a phone (`Discord` allows for both). `Emails` were also used, mainly to communicate with other stakeholders as we only had their contact info via this channel; this allowed us to inform all parties when necessary.
-None of the tools used for communication truly guaranteed the confidentiality of exchanges; however, this was not an issue as the project had no confidentiality constraints.
+All remaining work was managed using the `Jira` tool, allowing us to maintain tracking of the various tasks and sub-tasks to be completed. We chose `Jira` because one team member was already familiar with the tool, and it provided a board for tasks and sub-tasks as well as an ordered schedule similar to a Gantt chart. In hindsight, the tool was far too heavy. It requires too many ressources from the computer to load it, was time-consuming to learn and offered too many management options for our needs. Choosing a simpler, lighter tool would have been more relevant.
 
 ## Risks Analysis & Planning
 
-Below is the Gantt chart for our project. This chart contains the original Gantt onto which we have overlaid the end-of-project Gantt. Elements crossed out in dark gray represent parts we cancelled; parts framed in green are the completed parts we kept for our final submission goal, following the many setbacks we faced—notably the absence of certain modules initially planned or the lack of time to perform certain tasks. The blue (not crossed out) section of the tasks represents the completed portion of those tasks.
-
-It can be seen that we had to eliminate many parts initially planned; notably, a significant portion of the subject we had drafted was ultimately not kept. By "kept," we mean that it is a part that was finished but will not be useful as it concerns sensors we did not obtain, which therefore fall outside the project context. This specifically applies to the humidity and pressure sensors, for which implementation was also cancelled for this reason. The implementation of `LoRa` was cancelled primarily due to a lack of time, but also because members of another group, more specialized than us in embedded electronics, failed to make `LoRa` work on the `Micro:bit` despite having more time, expertise, and human resources. The part concerning the weather balloon was cancelled mainly due to lack of time but also as a consequence of other cancellations: a weather balloon only capable of measuring temperature and locating itself is not truly complete.
+Below is the Gantt chart for our project. As represented, the initial plan had to be changed following the many setbacks we faced—notably the absence of certain modules initially planned or the lack of time to perform certain tasks. It was instead replaced by the revised plan.
 
 ![Figure 2: Gantt Chart with cancelled tasks](Gantt_en.png "Figure 2: Gantt Chart with cancelled tasks")
 
-This perfectly illustrates the many hazards we faced and our difficulties in achieving a clear project. This Gantt chart also perfectly illustrates the fact that we did not identify many risks or that we did not properly assess their probability or the impact they could have on the project. We will look at this in more detail momentarily when discussing our risk analysis.
+Among the changes we made, we gave up on the humidity and pressure part of the subject. Unlike we planned, we didn't receive the sensor necessary. But we realised this after writing down the subject, and left these parts although no blocks were implemented related to that.
+
+The implementation of `LoRa` was cancelled primarily due to a lack of time. Furthemore, members of another group, more specialized than us in embedded electronics, failed to make `LoRa` work on the `Micro:bit` despite having more time, expertise, and human resources. 
+
+The part concerning the weather balloon was cancelled mainly due to lack of time but also as a consequence of other cancellations: a weather balloon only capable of measuring temperature and locating itself is not truly complete.
 
 **Risks identified at the start:**
 
@@ -132,27 +129,64 @@ As can be seen, several risks unforeseen at the start of the project proved crit
 
 ## Financial Assessment
 
-This project was carried out with limited resources, though they were sufficient except regarding time. we had:
+This project was carried out with limited resources, though they were sufficient except the time. We had:
 
 - 2 laptops
 - 2 Micro:bit V2
 - 1 XA1110 GPS module
 - 2 LoRa transceivers, Wio-SX1262
-- 2 students (Robin COURAULT & Sophie HAUGUEL) for approximately 50 hours each, totaling about one hundred man-hours.
+- 2 students (Robin COURAULT & Sophie HAUGUEL) for approximately 50 hours each, totaling about one hundred work hours.
 
 `\newpage{}`{=latex}
 
 # Technical Work
 
+## Specifications
+
+The needs analysis proved to be complex due to our main contact's busy schedule. The specifications (cahier des charges) were difficult to define and stabilize. After a first version based on the short project description, we produced a second version by discussing it with Mr. DONSEZ, then adjusted it throughout the project as we progressed and asked questions. We couldn't manage to validate the second version of the specifications. It was through questions and discussions that we refined the requirements.
+
+Thus, the practical work assignment was described in our specifications as being:  
+
+- independent of other resources, 
+- intended for users already familiar with the `Micro:bit V2`,
+- covering each new module useful for the weather balloon, 
+- required to be in `Markdown` format. 
+
+To suit middle school students, we agreed on a rather short format for each part of our practical work assignment, with each part consisting of:
+
+- short explanations regarding its objective and context;
+- manipulation instructions, requiring exploration and understanding;
+- a correction of the manipulations and short explanations;
+- an optional discovery lesson to explain the relevance of the section toward building a weather balloon.
+
+To cover all the modules necessary for the weather balloon while maintaining a logical and pedagogical sequence, we chose to define the following sections in the subject:
+
+- Introduction
+- Launch test (checking if the board works)
+- Exploration of the modules with:
+  - Thermometer
+  - Accelerometer
+  - Pressure sensor
+  - Humidity sensor
+  - GPS
+  - LoRa Transmitter/Receiver
+- Development of the program for the weather balloon, also allowing for the consolidation of acquired knowledge.
+
+In the second specifications, we only kept the thermometer, accelerometer and GPS modules in the exploration part.
+
+## Tools used
+
+Considering the development environments, `VSCode` and `neovim` were employed. This difference did not cause any problem as the online `Playground` interface from `Microsoft MakeCode` was also used extensively. It most notably allows to test code effects and functionality on the `MakeCode` interface and the `Micro:bit` board. We tried other local comilation tools, such as a local installation of `MakeCode` or `mkc`. This `Playground` interface is also useful for development as it includes an editor with `TypeScript` auto-completion, as well as for libraries specific to `MakeCode` and the `Micro:bit`. Both were a loss of time, as documentation was rare and over-summarised. 
+
+To continue, we used `Git` and specifically `GitHub`. `GitHub` was required for the creation of a `Microsoft MakeCode` extension. `MakeCode` itself was the coding interface imposed by our project manager and owner, Mr. DONSEZ. Using `MakeCode` also dictated the use of the `TypeScript` language to write the extension, as it is the only truly accepted language. There exists methods for using `C++` in MakeCode, which are very poorly documented.
+
+Moving on to hardware, regarding the board and various sensors, we had to work with the `Micro:bit V2`. But the board lacked libraries for utilizing all the hardware modules we were given. This means that we had to implement the drivers ourselves, making the project best fit for electronic students. However, the board has the advantages of being inexpensive (~€20). It is also specifically designed for middle school students, and goes along the `MakeCode` interface. For the sensors and transmitters, given the number of existing modules and the time we had, we appreciated not having to choose them ourselves. Their technical documentation was quite accessible.
+
 ## Instructions Sheet
 
 > See branch `sujet`, file `sujet/sujet.md`.
 
-Initially, we built a first skeleton within the specifications. This first skeleton only contained the names of the parts and the breakdown of the subject.
-
-We then developed a more advanced skeleton detailing each part. This time, we added a line to quickly describe the expected features of each section. In addition to this brief description, the skeleton for each part was more finely defined. Since the project aims to be educational, each part would consist of short explanations regarding its objective and context, manipulation instructions, a brief lesson, and a correction for the exercises. To make the tutorial more pleasant to use and easier for teachers to divide, the corrections section was subsequently moved to a separate section at the end of the document.
-
-In the final stage, each part was written by completing the previously defined skeleton. An introduction was also added to present the final goal of the project: the development of a program for a sounding balloon or weather balloon. For each part, the first step was to introduce the section with a short sentence, such as: `To ensure everything is properly installed, let's start with a quick test:`. We then wrote the manipulation instructions to be as concise, explicit, and precise as possible, for example:
+We wrote the subject in iterations, each time refining it a bit more. With a skeleton first, containing titles only. Then a short sentence describing the upcoming contents. In the final stage, each part was written by completing the previously defined skeleton. An introduction was also added to present the final goal of the project: the development of a program for a sounding balloon or weather balloon. For each part, the first step was to introduce the section with a short sentence, such as: `To ensure everything is properly installed, let's start with a quick test:`. We then wrote the manipulation instructions to be as concise, explicit, and precise as possible, for example:
 
 ```md
 Try to make the LED blink.
@@ -162,11 +196,9 @@ Try to make the LED blink.
 
 Following the instructions, a small lesson section explains the importance of the sensor in the context of a weather balloon. This lesson part required research, but there was no need to be exhaustive; its purpose was only to provide the broad outlines of the sensor's utility. We supplemented this with a short link redirecting to explanatory pages from Météo-France, so that interested students could find more information or an alternative explanation.
 
-Finally, the drafting of the parts concluded with the correction elements, which were first built and tested on the MakeCode interface and then integrated as screenshots at the end of the subject in a separate section titled `Corrections`.
+Finally, the drafting of the parts concluded with the correction elements. They were first built and tested on the MakeCode interface and then integrated as screenshots at the end of the subject. We put them in a separate section titled `Corrections`, so that the teacher can easily cut them out if they prefer.
 
-In total, 4 parts were written: `Thermometer`, `Pressure`, `Humidity`, and `GPS`, the latter not being completely finished as a short lesson is potentially missing. Furthermore, these parts do not all have a correction and are not necessarily implemented at the MakeCode extension level, but we will discuss this further on.
-
-> see in [Appendices](#appendices---instructions-sheet), each part of the instructions sheet.
+In total, 4 parts were written: `Thermometer`, `Pressure`, `Humidity`, and `GPS`, the latter not being completely finished as a short lesson is potentially missing. Furthermore, these parts do not all have a correction and are not necessarily implemented at the MakeCode extension level, due to the sensor blocks coding complications.
 
 ## Code
 
@@ -175,44 +207,27 @@ In total, 4 parts were written: `Thermometer`, `Pressure`, `Humidity`, and `GPS`
 
 ### Blocks
 
-> It should be noted that we are speaking here only of the methods and functions usable via the MakeCode interface in the form of blocks; we are not speaking of the additional code necessary to make them function.
+> It should be noted that we are only describing here the methods and functions usable via the MakeCode interface in the form of blocks. We are not considering the additional code necessary to make them functional.
 
-#### Pressure Sensor
+We defined what the blocks should be for each sensor, including those we did not implement in the end. It includes a data retrieval for every module. The pressure sensor also included a `setPressureRange` to adapt the precision to the coder's needs. We also considered adding `onChange` blocks for some sensors. It would have allowed event-based programming with the blocks.
 
-For the first set of blocks, we focused on the pressure sensor, which we ultimately did not obtain, but here are the planned blocks:
-
-- `setPressureRange` block: similar to the `setAccelerometerRange` present in MakeCode, the idea was to allow students to define a maximum value for the pressure sensor.
-- `pressure` or `getPressure` block: this was simply intended to retrieve the current value from the pressure sensor, the current pressure.
-
-> Having not obtained the pressure sensor, these blocks were not implemented.
-
-#### Humidity Sensor
-
-For the second set of blocks, we addressed the humidity sensor:
-
-- `humidity` or `getHumidity` block: used simply to retrieve the current value of the sensor.
-- `onHumidityChange` block: which we considered optional, intended to be an event—meaning a block that executes the code provided as soon as the humidity changes.
-
-> Having not obtained the humidity sensor, these blocks were not implemented.
+Here is a description of the blocks we planned for GPS and LoRa sensors, as these are more complex.
 
 #### GPS
 
-For the third set of blocks, the GPS was addressed:
-
 - `getLocation` block: allows the current location to be retrieved in the form of an object consisting of two elements; this block aimed to introduce students to the world of the object-oriented paradigm while providing a simple way to retrieve a meaningful location.
 - `getLocationElement` block: allowing the retrieval of the longitude or latitude of a `Location` object using a block that lets the user select one or the other value via a dropdown list.
-- We then chose to add several additional blocks to add interaction to the project and allow students to visually see the location evolve; we will see the implementation in more detail in the [Map library](#map-library) section. Of course, these blocks are not intended for use in the actual weather balloon:
 
-  - `createMap` block: allowing the construction of a `Map` object; this object can be seen as an aggregate of `Location` objects converted into flat coordinates. The `Map` object aims to allow the display of `Locations` more simply for students using the Micro:bit's 5x5 LED screen.
-  - `addLocation` block: allowing a `Location` to be added to a `Map`.
-  - `clearMap` block: allowing all points in a `Map` to be deleted.
-  - `setAnchor` block: allowing the anchor point used to display the `Map` to be redefined from a `Location` (without adding the `Location` to the Map points).
-  - `moveAnchor` block: allowing the anchor point to be redefined by providing an offset in grid cells from the current anchor point.
-  - `setCellSize` block: allowing the size of the `Map` cells to be redefined; when at least 1 point is located in a cell, it is lit up.
+We then chose to add several additional blocks to add interaction to the project. These allow students to visually see the location evolve, enabling them to test the GPS. We will see the implementation in more detail in the [Map library](#map-library) section. Of course, these blocks are not intended for use in the actual weather balloon:
+
+- `createMap` block: allowing the construction of a `Map` object; this object can be seen as an aggregate of `Location` objects converted into flat coordinates. The `Map` object aims to allow the display of `Locations` more simply for students using the Micro:bit's 5x5 LED screen.
+- `addLocation` block: allowing a `Location` to be added to a `Map`.
+- `clearMap` block: allowing all points in a `Map` to be deleted.
+- `setAnchor` block: allowing the anchor point used to display the `Map` to be redefined from a `Location` (without adding the `Location` to the Map points).
+- `moveAnchor` block: allowing the anchor point to be redefined by providing an offset in grid cells from the current anchor point.
+- `setCellSize` block: allowing the size of the `Map` cells to be redefined; when at least 1 point is located in a cell, it is lit up.
 
 #### LoRa
-
-For the final set of blocks, LoRa was addressed:
 
 - `sendMsg` block: allowing a LoRa message to be sent on a specific constant frequency.
 - `sendMsgFreq` block: allowing a LoRa message to be sent on a given frequency.
@@ -360,7 +375,7 @@ clear() {
 }
 ```
 
-As for the display block (`print`), we will not cover all of its code as it is quite long, but you can find its code and that of its utility functions in the [Appendices](#map---print--additionnals-functions). The general idea is as follows:
+As for the display block (`print`), we will not cover all of its code as it is quite long. The general idea is as follows:
 
 - Reset the array of pixels to be lit.
 - Define a top boundary value and a left boundary value based on the display position and the anchor point coordinates.
@@ -557,526 +572,27 @@ There we go; thanks to all of this, the GPS module has what it needs to function
 
 # Conclusion
 
-To finally conclude this report, let us start by recalling that nothing went as planned; the project's final deliverables do not correspond to what was initially expected. Of the 7 parts (excluding the introduction) of the practical work subject, only five (`Launch Test`, `Thermometer`, `Humidity Sensor`, `Pressure Sensor`, and `GPS`) were mostly finalized, but only two of those five are truly completed (the `Launch Test` and `Thermometer` sections). Regarding the `MakeCode` extension, only the GPS module has functional blocks; as the pressure and humidity sensors were not received and the thermometer was already integrated into `MakeCode`, `LoRa` was not implemented despite research to begin developing the driver and blocks. Furthermore, the GPS module blocks are partially functional but unusable because the GPS module resets before managing to synchronize with a satellite; consequently, the other blocks and functions using locations provided by the GPS are unusable as they are. This report is perhaps the only thing that proceeded without a hitch and thus stands as a witness to the difficulties encountered.
+To finally conclude this report, let us start by recalling that nothing went as planned. The practical work subject initially contained 7 parts (excluding the introduction). But only five (`Launch Test`, `Thermometer`, `Humidity Sensor`, `Pressure Sensor`, and `GPS`) were mostly finalized. Among these five, two are truly complete (the `Launch Test` and `Thermometer` sections). Regarding the `MakeCode` extension, only the GPS module has functional blocks. The other sensors were either not received and `LoRa` was not implemented despite research to begin developing the driver and blocks. Furthermore, the GPS module blocks are partially functional but unusable because of the GPS module's resets. This report is perhaps the only thing that proceeded smoothly and thus stands as a witness to the difficulties encountered.
 
-The project objectives were therefore not met regarding the non-pedagogical aspect, because while we encountered many problems, we also learned a great deal. Thus, this project taught us the importance of having a proper risk analysis and, above all, planning effective mitigation strategies to avoid facing unforeseen problems or those exceeding the measures taken; for indeed, even when mitigation was planned, the risk proved more impactful than anticipated and our strategies were therefore insufficient. Next, regarding organization, we decided to maintain a global understanding of the project across the entire team and involve everyone based on the premise that the lack of expertise would allow the team to upskill. However, it is now certain that we should have assigned already-competent team members to the various tasks to save time, which could then have been reinvested into tasks where the whole team needed to upskill; the time allocation could therefore have been better. Our project manager told us to use pre-existing libraries to speed up our work, but the lack of turnkey libraries for the `Micro:Bit` actually complicated our work and, above all, wasted our time trying to make libraries work that were not designed for our board and developing in a language difficult to use on the `MakeCode` tool, which was one of the project's key points. This taught us that it is sometimes simpler to rewrite a basic library rather than repurposing one from its original use. The lack of expertise in embedded electronics was also a major hurdle, particularly in exploring component documentation and understanding it, but also in our research; given the time constraints, a significant background of knowledge and skills was necessary. Distinguishing between the expectations of the client and those of the end-users was also an important learning point, as we discovered that end-users were using a tool other than `MakeCode` only three weeks before the project deadline; this is our fault, as we assumed the client could only be mistaken on details rather than such critical elements, and so we contacted the end-users too late. Finally, to conclude our learning experiences, the lack of various choices in this project was a real bottleneck for the team because, given our skills, the choice of the board, components, or languages could have allowed us to reduce the impact of our lack of expertise in embedded electronics, as well as the colossal amount of time required for the project.
+On the other hand, this troubleshooting made this project very educational for us. It taught us the importance of having a proper risk analysis, to avoid facing unforeseen problems or those exceeding the measures taken. Planning effective mitigation strategies would have lessened the time lost. This concern should have been more present in our daily meetings. Clearly setting a time or effort limit before changing the strategy would be a great way to do that.
 
-Let us close by discussing what remains to be done and the future possibilities our project offers; first, there are the various parts of the subject to complete, as well as the GPS (to be finished) and LoRa (to be implemented) sections in the `MakeCode` extension. The modules we did not receive (humidity sensor and pressure sensor) could also be added. Regarding the project's future, it is important to question the choice of the `Micro:Bit` board for this project, as well as the `MakeCode` interface, which is relatively closed to the languages most commonly used in embedded systems, namely `C++` and `Python`.
+Next, regarding organization, we decided to maintain a global understanding of the project across the entire team. This means taking the time so that everyone can learn all the tools used. However, regarding the time constraint, it is now certain that we should have assigned the tasks to already-competent team members. The time spared could then have been invested into tasks where the whole team needed to upskill. The time allocation could therefore have been better.
 
-`\newpage{}`{=latex}
+Our project manager told us to use pre-existing libraries to speed up our work. Unfortunately, the lack of turnkey libraries for the `Micro:Bit` actually complicated our work. We wasted our time trying to use libraries when they were not designed for our board and developed in a language difficult to use on the `MakeCode` tool. This taught us that it is sometimes simpler to rewrite a basic library rather than repurposing one from its original use.
 
-# Appendices
+But even then, the lack of expertise in embedded electronics was still a major complication. In particular, concerning the exploring and understanding of the components' documentation. But also in our research, given the time constraints, a significant background of knowledge and skills was necessary.
 
-## Project Management Meeting Minutes
+Distinguishing between the expectations of the client and those of the end-users was also an important learning point. Since we discovered that the teacher was using a tool other than `MakeCode` only three weeks before the project deadline. This is our fault, as we assumed the client perfectly knew the user's needs, which is in truth rarely the case. 
 
-```md
-# Compte rendu de la réunion du 16/03/26
+Finally, to conclude our learning experiences, the lack of various choices in this project was a real bottleneck for the team. Given our skills, choosing the board, components, or languages could have allowed us to reduce the impact of our lack of expertise in embedded electronics, as well as the colossal amount of time required for the project.
 
-## Difficultés
-
-### Obtention tardive des composants
-
-Le projet a commencé le 19 janvier. 
-Cependant, nous n'avons eu tous les composants que le 24/02.
-
-### Compilation makecode
-
-Nous pensions utiliser des drivers ou des librairies pré-faites. 
-Pour cela, il faut compiler du C++, ce qui est très difficile avec Makecode.
-
-### Documentation incomplète
-
-Les fonctions de la librairie micro:bit sont très dures à trouver.
-Il existe beaucoup d'outils pour la micro:bit, c'est difficile de ne pas faire l'amalgame.
-La documentation est floue sur les sites officiels, et éparpillée ailleurs.
-Contraint d'aller sur des forums pour trouver des solutions.
-
-### Client indéterminé
-
-Difficile de savoir qui est le "client" entre M. Donsez et l'enseignante.
-Contact tardif avec elle, pour réaliser qu'ils n'utilisent pas MakeCode mais un autre outil...
-L'objectif du projet a été difficile à déterminer.
-Exigences de M. Donsez pour le ballon météo et la réception des données LoRa compatibles avec le collège ?
-
-## Pistes futures
-
-Dans le rapport : bien expliquer tous les problèmes auxquels nous avons fait face.
-
-Pour quand même rendre quelque chose en LoRa, nous pouvons l'implémenter en micropython.
-Il y a plus de documentation, et c'est certainement une bonne première étape pour derrière en faire 
-des blocs.
-
-Réaliser une documentation : pour permettre à d'autres d'éviter nos erreurs.
-Aussi, puisque trouver les informations est une grande difficulté, les rassembler à un endroit 
-pourrait faciliter le travail des suivants.
-```
-
-## Code
-
-### Map - print & additionnals functions
-
-```ts
-print() {
-    this.resetpixelsToTurnOn();
-    let screenTop : number;
-    let screenLeft : number;
-
-    switch (this.anchorPosition) {
-        case anchorPositionType.anchorTopLeft :
-            screenTop = this.anchor_m.y + (this.cellSize_m/2);
-            screenLeft = this.anchor_m.x - (this.cellSize_m/2);
-            this.pixelsToTurnOn[0][0] = true;
-            this.setPointsToTurnOn(screenTop,screenLeft);
-            break;
-        case anchorPositionType.anchorTopRight :
-            screenTop = this.anchor_m.y + (this.cellSize_m/2);
-            screenLeft = this.anchor_m.x - (this.cellSize_m*this.printSize + this.cellSize_m/2);
-            this.pixelsToTurnOn[0][this.printSize-1] = true; // last char
-            this.setPointsToTurnOn(screenTop,screenLeft);
-            break;
-        case anchorPositionType.anchorCenter :
-            screenTop = this.anchor_m.y + (this.cellSize_m*this.printSize/2 + this.cellSize_m/2);
-            screenLeft = this.anchor_m.x - (this.cellSize_m*this.printSize/2 + this.cellSize_m/2);
-            this.pixelsToTurnOn[this.printSize/2][this.printSize/2] = true; // mid char
-            this.setPointsToTurnOn(screenTop,screenLeft);
-            break;
-        case anchorPositionType.anchorBottomLeft :
-            screenTop = this.anchor_m.y + (this.cellSize_m*this.printSize + this.cellSize_m/2);
-            screenLeft = this.anchor_m.x - (this.cellSize_m/2);
-            this.pixelsToTurnOn[this.printSize-1][0] = true;
-            this.setPointsToTurnOn(screenTop,screenLeft);
-            break;
-        case anchorPositionType.anchorBottomRight :
-            screenTop = this.anchor_m.y + (this.cellSize_m*this.printSize + this.cellSize_m/2);
-            screenLeft = this.anchor_m.x - (this.cellSize_m*this.printSize + this.cellSize_m/2);
-            this.pixelsToTurnOn[this.printSize-1][this.printSize-1] = true; // last char
-            this.setPointsToTurnOn(screenTop,screenLeft);
-            break;
-    }
-    
-    basic.showLeds(this.convertPixelsToTurnOnInString());
-}
-
-setPointsToTurnOn(limitTop : number, limitLeft : number) {
-    this.points.forEach(p => {
-        if (p.x >= limitLeft && p.x < limitLeft + this.printSize*this.cellSize_m 
-            && p.y <= limitTop && p.y > limitTop - this.printSize*this.cellSize_m) {
-            // parcours de toutes les lignes de la grille
-            for (let i = 1; i <= this.printSize; i++) {
-                let j : number;
-                // parcours de toutes les colonnes de la grille
-                for (j = 1; j <= this.printSize; j++) {
-                    // case where cell is already true
-                    if (this.pixelsToTurnOn[i-1][j-1]) {
-                        break;
-                    }
-                    // case where p is in [i-1][j-1] cell
-                    else if (p.x < limitLeft + j*this.cellSize_m && p.y > limitTop - i*this.cellSize_m) {
-                        this.pixelsToTurnOn[i-1][j-1] = true;
-                        break;
-                    }
-                }
-
-                // case where break in prev (j) loop, p can't be in two cells
-                if (this.pixelsToTurnOn[i-1][j-1]) {
-                    break;
-                }
-            }
-        }
-    });
-}
-
-convertPixelsToTurnOnInString() : string {
-    let stringGrid = "";
-    this.pixelsToTurnOn.forEach(l => {
-        l.forEach(c => {
-            stringGrid = c ? stringGrid += '#' : stringGrid += '.';
-        })
-        stringGrid = stringGrid.concat("\n");
-    });
-    return stringGrid;
-}
-
-resetpixelsToTurnOn() {
-    // réutilisation pour éviter de trop réserver de la mémoire
-    if (this.pixelsToTurnOn && this.pixelsToTurnOn.length === this.printSize) {
-        for (let i = 0; i < this.printSize; i++) {
-            for (let j = 0; j < this.printSize; j++) {
-                this.pixelsToTurnOn[i][j] = false;
-            }
-        }
-    } else {
-        // Initialisation première fois
-        this.pixelsToTurnOn = [];
-        for (let i = 0; i < this.printSize; i++) {
-            this.pixelsToTurnOn.push([]);
-            for (let j = 0; j < this.printSize; j++) {
-                this.pixelsToTurnOn[i].push(false);
-            }
-        }
-    }
-}
-```
-
-## Appendices - Instructions sheet
-
-> Can be finded on the [github](https://github.com/Robin-Courault/pxt-kit-pedagogique-iot-meteo/tree/main) in the folder `sujet`.
-> We recommand you to check the instructions sheet as file and not here, because in the pdf format, certain parts overflow of the page.
-
-### Appendices - Introduction
-
-```md
-# Kit pédagogique SEED micro:bit
-
-## I. Intro
-
-    Connais-tu les ballons-sondes ?  
-
-Ces ballons permettent de faire des mesures dans l'atmosphère. Nous nous intéressons aux ballons météorologiques, dont la nacelle est remplie de capteurs.
-
-Ils s'élèvent dans le ciel, à plus de 25km du sol ! Cela leur permet de mesurer la température, l'humidité, la vitesse du vent et beaucoup d'autres données. Grâce à toutes les données récoltées depuis les ballons météorologiques, nous pouvons prédire la météo !
-
-L'objectif de ce travail pratique est de réaliser un programme capable de mesurer des données et de les envoyer à une antenne, ce programme sera mis en application par une carte électronique qui pourra ensuite être déposée dans la nacelle d'un ballon :
-
-1. Après un court test de la carte, tu vas découvrir chaque capteur indépendamment afin de comprendre leur fonctionnement et leur utilisation. \[Partie III - Les Capteurs]\(#iii-les-capteurs).
-2. Une fois les capteurs maitrisés, tu découvriras un moyen de communication qu'utilises les objets connectés, la communication à longue portée dites `LoRa` pour `Long Range`. \[Partie IV - La communication LoRa]\(#iv-communication-lora-à-ajouter)
-3. Une fois que tu sauras utiliser tous les capteurs et communiquer, tu pourras réaliser ton propre programme de ballon météo. \[Partie V - Le Ballon]\(#v-ballon-météorologique--envoi-de-toutes-les-données-au-format-aprs-).
-
-> Pas de panique, tu seras guidé tout au long de ce travail pratique.
-
-**Attention :** toucher les parties métalliques de la carte pendant son fonctionnement peut l'abîmer ! De plus, la carte n'aime pas l'eau...
-```
-
-### Appendices - Test de Lancement
-
-```md
-## II. Test de lancement - Faire clignoter une LED
-
-Pour s'assurer que tout est bien installé, commençons par un petit test :
-
-- Essaie de faire clignoter la LED.
-
-    > Elle doit s'allumer 500ms, s'éteindre 500ms puis recommencer indéfiniment.
-
-**Si tu n'as pas réussi** aucun problème, jette un oeil à \[la fin du sujet ou clique ici pour voir la solution.]\(#via-correction---test-de-lancement)
-```
-
-### Appendices - Thermometer
-
-```md
-## III. Les capteurs
-
-### III.A. Thermomètre (micro:bit)
-
-#### III.A.1. Utilisation du thermomètre
-
-Essayons maintenant de faire fonctionner le thermomètre :
-
-1) Affiche la température capturée par le thermomètre de la carte.
-
-    1. Récupérer la température.
-    2. Afficher la valeur récupérée.
-
-2) Est-ce que la température affichée se met à jour ?
-    - Si oui, bien joué, tu avais déjà tout prévu.
-    - Sinon, fais en sorte que l'affichage change lorsque la carte se réchauffe ou se refroidit.
-
-    Dans tous les cas, tu peux tester si ça marche en soufflant dessus, en la mettant dehors, en la rapprochant d'un radiateur, etc.
-
-**Si tu n'as pas réussi** aucun problème, jette un oeil à \[la fin du sujet ou clique ici pour voir la solution.]\(#vib-correction---thermomètre)
-
-#### III.A.2. Mais quel intérêt de connaître la température ?
-
-Connaitre la température a plusieurs intérêts :
-
-- Le premier vise à analyser les évolutions de température ou de moyenne de température dans une zone et ce sur plusieurs années, les températures collectées sont donc archivées sur de longues durées.
-    > Cela permet notamment de constater une réelle augmentation des températures moyennes en France par exemple mais plus généralement dans le monde sur les quelques dernières dizaines d'années. Salut le réchauffement climatique !
-- Le second intérêt est de mettre en évidence des zones à fortes différences de température, identifiant les différents fronts des perturbations.
-- Le troisième intérêt plus utile pour nous est d'identifier les zones favorables aux orages caractérisées par de l'air chaud en bas et de l'air froid en altitude.
-
-\[Pour en savoir plus, Météo France a une petite page explicative, clique ici]\(https://meteofrance.com/comprendre-la-meteo/temperatures/quest-ce-que-la-temperature).
-```
-
-### Appendices - Pressure Sensor
-
-```md
-### III.B. Pression (SEED)
-
-#### III.B.1. Utilisation du capteur de pression
-
-##### III.B.1.a. La valeur de pression
-
-Commençons par afficher la pression capturée par le capteur de la carte :
-
-1. Récupérer la pression.
-2. Afficher la valeur récupérée.
-3. Faire en sorte que la valeur se mette à jour régulièrement.
-
-> As-tu remarqué que la valeur ne change pas beaucoup ?
-> Des explications sont présentes un \[peu plus loin]\(#iiib2-mais-la-pression-quest-ce-que-cest-) pour t'expliquer pourquoi.
-
-**Si tu n'as pas réussi** aucun problème, jette un oeil à \[la fin du sujet ou clique ici pour voir la solution.]\(#vic1-correction---pression---affichage-de-la-valeur)
-
-##### III.B.1.b. La précision de pression (pressure range en anglais)
-
-> La précision correspond à l'intervalle/la plage des valeurs récupérables avec les blocs que tu as utilisé dans la manipulation précédente.
-
-    TODO : exercice de manipulation de la pressure range.
-
-**Si tu n'as pas réussi** aucun problème, jette un oeil à \[la fin du sujet ou clique ici pour voir la solution.]\(#vic2-correction---pression---la-précision)
-
-#### III.B.2. Mais la pression qu'est ce que c'est ?
-
-Ici, on parle de pression atmosphérique, c'est à dire la force exercé par le poids de l'air sur une surface, cette force est exprimée en Pascal (Pa).
-
-La pression atmosphérique évolue lorsque l'on monte en altitude, au niveau de la mer (0m d'altitude), on a en moyenne 1013.25 hectoPascals. Imaginez un peu, une colonne d'air d'1m2 soit un carré d'un mètre par un mètre partant de la surface de la Terre et montant jusqu'au sommet de l'atmosphère (en moyenne 600km d'altitude) a une masse de près de 10 000kg.
-
-Les ballons-sondes volent aux alentours de 25km d'altitude, à cette hauteur, la pression est d'environ 25 hPa (hectoPascals).
-
-\[Pour en savoir plus, Météo France a une petite page explicative, clique ici]\(https://meteofrance.com/actualites-et-dossiers/comprendre-la-meteo/quest-ce-que-la-pression-atmospherique).
-
-#### III.B.3. La pression à quoi ça sert ?
-
-Pour faire simple, une pression importante est synonyme de temps calme et de beau temps, à l'inverse une pression faible va de paire avec le brouillard et les nuages bas.
-
-Mais les valeurs ne sont pas la seule donnée leurs variations ont également une importance, par exemple une diminution rapide est souvent synonyme de pluie et de vents violents.
-
-Enfin ça c'est pour faire simple car le temps est quelque chose de complexe, l'important c'est d'avoir des données de façon constante afin de pouvoir faire des analyses et continuellement apprendre et se corriger.
-```
-
-### Appendices - Humidity Sensor
-
-```md
-### III.C. Humidité (SEED)
-
-#### III.C.1. Utilisation du capteur d'humidité
-
-##### III.C.1.a. Afficher la valeur
-
-Commençons une fois de plus par afficher la valeur du capteur d'humidité, n'hésites pas à réutiliser ce que tu as réalisé précédemment.
-
-1. Récupérer la valeur d'humidité.
-2. Afficher la valeur récupérée.
-3. Faire en sorte que la valeur se mette à jour régulièrement.
-
-> Tu peux essayer de souffler sur le capteur ou la carte pour augmenter l'humidité, tu peux aussi couvrir la carte avec ta main.
-
-**Si tu n'as pas réussi** aucun problème, jette un oeil à \[la fin du sujet ou clique ici pour voir la solution.]\(#vid1-correction---humidité---affichage-de-la-valeur)
-
-##### III.C.1.b. Fonction d'affichage de barre
-
-Cette fois, allons un peu plus loin, essaies d'afficher l'humidité sous la forme d'une barre ou d'un nombre de LEDs qui suit les évolutions de la valeur de l'humidité.
-
-1. Déterminer l'incrément, l'intervalle de valeur pour chaque LED allumée ou chaque colonne de ta barre d'affichage. Par exemple essaie du 1 pour 1, chaque valeur entière correspond à un nombre de LEDs allumées, ainsi, `8`, `8.3`, `8.5` ou encore `8.31546` de valeur d'humidité correspondent tous à 8 LEDs allumées. Est-ce-que cela te semble pertinent ? Si ce n'est pas le cas, prend un autre incrément.
-2. Créer une boucle qui récupère la valeur et allume un certain nombre de LEDs en fonction de la valeur récupérée.
-
-> Dans le cas d'une barre, tu possèdes donc 5 LEDs de longueur, donc 6 valeurs possibles (en comptant 0).
-> Dans le cas d'un nombre de LEDs, tu possèdes 25 LEDs sur la Micro:bit, donc 26 valeurs possibles (en comptant 0).
-
-**Si tu n'as pas réussi** aucun problème, jette un oeil à \[la fin du sujet ou clique ici pour voir la solution.]\(#vid2-correction---humidité---fonction-daffichage-en-barre)
-
-#### III.C.2. L'humidité, ça sert à quoi ?
-
-Pour commencer l'humidité est mesurée sous deux formes en météorologie :
-
-- La valeur absolue, indépendante de la température qui mesure la quantité de vapeur d'eau dans un volume d'air donné, généralement exprimée en g/m3 (grammes d'eau par mètre cube d'air).
-- La valeur relative, dépendante de la température et qui correspond au rapport entre la quantité d'eau contenue dans l'air et la quantité maximale possible, exprimée en pourcentages (la quantité de vapeur d'eau dans l'air occille entre 0.1 et 5% du volume d'air total, la valeur relative est donc à 100% lorsque la quantité d'eau atteint 5% du volume d'air total).
-
-En météorologie, l'humidité est l'un des éléments utilisés pour donner des températures ressenties mais elle donne beaucoup d'autres informations comme la présence de nuages, les chances de précipitations (pluies), de brume et de brouillard. C'est un paramètre important qui fait partie d'un tout avec la pression et la température afin de prévoir la météo.
-
-\[Pour en savoir plus, Météo France a une petite page explicative, clique ici]\(https://meteofrance.com/actualites-et-dossiers/comprendre-la-meteo/quest-ce-que-lhumidite).
-```
-
-### Appendices - GPS
-
-```md
-### III.D. GPS
-
-Pour utiliser le GPS, nous allons avoir besoin d'objets, dans le cadre d'un code un objet est un élément qui contient des données et peut effectuer des actions. Dans le cas de notre GPS, on possède deux objets que l'on peut utiliser :
-
-- Les objets de type `Location` (ou localisation en français) qui contiennent des coordonnées d'un point dans le monde, ils peuvent fournir la latitude et la longitude ainsi que se transformer en un point (utilisé dans l'objet suivant).
-- Les objets de type `Map` (ou carte en français) qui représentent un ensemble de points répartis sur des cases, ces objets servent à stocker et afficher plus facilement un ensemble de points (construits à partir d'objets `Location`).
-
-#### III.D.1. Afficher les coordonnées
-
-Avant d'utiliser les objets `Map` qui sont plus compliqués, essayons d'afficher les coordonnées de la carte grâce aux objets `Location` :
-
-1. Récupérer un objet `Location` qui contient les coordonnées (latitude & longitude).
-2. Afficher la latitude, puis la longitude de l'objet `Location` récupéré.
-3. Faire en sorte que la valeur s'actualise.
-4. Se déplacer avec la carte (sur plusieurs mètres) et vérifier que les coordonnées affichées changent.
-
-**Si tu n'as pas réussi** aucun problème, jette un oeil à \[la fin du sujet ou clique ici pour voir la solution.]\(#vie1-correction---gps---afficher-les-coordonnées)
-
-#### III.D.2. Utiliser une carte
-
-Maintenant que tu sais utiliser une localisation GPS, nous allons explorer l'objet `Map` :
-
-1. Construire un objet `Map` en utilisant une localisation récupérée au préalable. Nous te conseillons d'utiliser une taille de quelques mètres (entre 1 et 5) pour les cellules afin de pouvoir tester facilement par la suite.
-2. Ajouter d'autres localisations à la carte (**Attention :** les localisations doivent être espacées de quelques mètres pour la suite).
-3. Afficher la carte & remarquer que les cases dans lesquelles au moins une localisation se situe sont représentées par des LEDs allumées.
-4. Déplacer la zone d'affichage de la carte (L'ancre de la carte est le point à partir duquel la carte est affichée, la carte affiche uniquement une zone de 5*5 cellules même si elle a plus de cellules remplies).
-5. Afficher de nouveau la carte & constater que les points se sont déplacer ou que de nouveaux sont apparus.
-
-**Si tu n'as pas réussi** aucun problème, jette un oeil à \[la fin du sujet ou clique ici pour voir la solution.]\(#vie1-correction---gps---utiliser-une-carte)
-```
-
-### Appendices - LoRa
-
-```md
-## IV. Communication LoRa
-
-- Cours : utilisation limitée
-- Emission et réception de messages
-- Ajout d'un header pour trier la réception
-- Envoi de différentes données (nécessitant test côté récepteur)
-```
-
-### Weather balloon
-
-```md
-## V. Ballon météorologique
-
-- Cours : Le format APRS et pourquoi l'utiliser ?
-- Accompagnement des élèves à travers la fusion de tout ce qui a été vu précédemment dans l'objectif de former un ballon météorologique utilisable.
-```
-
-### Appendices - Corrections
-
-```md
-## VI. Corrections
-
-Bienvenue dans la section des corrections, tu trouveras ci-dessous des corrections aux exercices pratiques du sujet. Il y a **souvent plusieurs bonnes réponses** et les **corrections ne contiennent pas toutes les bonnes façons de répondre** à un exercice, en cas de doute, demande au professeur de vérifier ta réponse.
-
-> **Note :** En règle générale nous réalisons la réponse la plus concise (= courte) possible.
-
-### VI.A. Correction - Test de lancement
-
-Pour cette correction, nous avons choisi d'allumer la LED en haut à gauche de la carte (aux coordonnées (0,0)). Mais il est possible de le faire avec n'importe quelle LED.
-
-#### VI.A.1. Correction - Test de lancement - Mode Blocs
-
-\!\[correction test de lancement en mode blocs]\(./images/sol_test-lancement.png)
-
-#### VI.A.2. Correction - Test de lancement - Mode JavaScript (code)
-
-Version utilisant \`toggle\`
-
-\`\`\`js
-basic.forever(function () {
-    led.toggle(0, 0)
-    basic.pause(500)
-})
-\`\`\`
-
-Version utilisant \`plot\` et \`unplot\`
-
-\`\`\`js
-basic.forever(function () {
-    led.plot(0, 0)
-    basic.pause(500)
-    led.unplot(0, 0)
-    basic.pause(500)
-})
-\`\`\`
-
-### VI.B. Correction - Thermomètre
-
-Pour cette correction, nous avons choisi d'attendre 1 seconde entre chaque mesure + affichage de la température mais peut importe la durée de pause, cela fonctionne également sans pause.
-
-> Mode Blocs
-
-\!\[correction utilisation du thermomètre en mode blocs]\(./images/sol_util-thermo.png)
-
-> Mode JavaScript (code)
-
-\`\`\`js
-basic.forever(function () {
-    basic.showNumber(input.temperature())
-    basic.pause(1000)
-})
-\`\`\`
-
-### VI.C. Correction - Pression
-
-#### VI.C.1. Correction - Pression - Affichage de la valeur
-
-> Mode Blocs
-
-    TODO : Quand on aura le bloc pour récupérer la valeur
-
-> Mode JavaScript (code)
-
-    TODO : Quand on aura le bloc pour récupérer la valeur
-
-#### VI.C.2. Correction - Pression - La précision
-
-> Mode Blocs
-
-    TODO : Quand on aura le bloc pour récupérer la valeur
-
-> Mode JavaScript (code)
-
-    TODO : Quand on aura le bloc pour récupérer la valeur
-
-### VI.D. Correction - Humidité
-
-#### VI.D.1. Correction - Humidité - Affichage de la valeur
-
-> Mode Blocs
-
-    TODO : Quand on aura le bloc pour récupérer la valeur
-
-> Mode JavaScript (code)
-
-    TODO : Quand on aura le bloc pour récupérer la valeur
-
-#### VI.D.2. Correction - Humidité - Fonction d'affichage en barre
-
-> Mode Blocs
-
-    TODO : Quand on aura le bloc pour récupérer la valeur
-
-> Mode JavaScript (code)
-
-    TODO : Quand on aura le bloc pour récupérer la valeur
-
-### VI.E. Correction - GPS
-
-#### VI.E.1. Correction - GPS - Afficher les coordonnées
-
-> Mode Blocs
-
-    TODO : Quand on aura les différents blocs du GPS
-
-> Mode JavaScript (code)
-
-    TODO : Quand on aura les différents blocs du GPS
-
-#### VI.E.1. Correction - GPS - Utiliser une carte
-
-> Mode Blocs
-
-    TODO : Quand on aura les différents blocs du GPS
-
-> Mode JavaScript (code)
-
-    TODO : Quand on aura les différents blocs du GPS
-
-### VI.F. Correction - LoRa
-
-    TODO : Quand on aura les blocs LoRa
-
-### VI.G. Correction - Ballon météo
-
-    TODO : Quand la partie ballon météo sera faite
-```
+Let us close by discussing what remains to be done and the future possibilities our project offers. First, there are various parts of the subject to complete, as well as the GPS (to be finished) and LoRa (to be implemented) sections in the `MakeCode` extension. The modules we did not receive (humidity sensor and pressure sensor) could also be added. Regarding the project's future, it is important to question the choice of the `Micro:Bit` board for this project, as well as the `MakeCode` interface, which is relatively incompatible with the languages most commonly used in embedded systems, namely `C++` and `Python`.
 
 `\newpage{}`{=latex}
 
 # Bibliography
 
-> made with <https://www.scribbr.fr> or manually when scribbr didn't work.
+> Made with <https://www.scribbr.fr> or manually when scribbr didn't work.
 
 - Extension localization files. (s. d.). Microsoft. <https://makecode.com/extensions/localization>
 - Naming Conventions. (s. d.). Microsoft. <https://makecode.com/extensions/naming-conventions>
