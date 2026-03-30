@@ -218,26 +218,24 @@ namespace inputSeed {
     //% blockSetVariable=location
     //% group="GPS"
     export function getLocation(): Location {
+        let trames = inputSeed.getAllTrames();
+
+        for (let i = 0; i < trames.length - 1; i++) {
+            if (trames[i].trim().length > 0) {
+                let parts = trames[i].trim().split('*')[0].split(',');
+                let tempLoc = inputSeed.parseTrameGGA(parts);
+
+                if (tempLoc != null) {
+                    inputSeed.setLastLoc(tempLoc);
+                } else {
+                    inputSeed.checkTrameMTK(parts);
+                }
+            }
+        }
+
         return lastLocation;
     }
 }
-
-loops.everyInterval(200, function () {
-    let trames = inputSeed.getAllTrames();
-
-    for (let i = 0; i < trames.length - 1; i++) {
-        if (trames[i].trim().length > 0) {
-            let parts = trames[i].trim().split('*')[0].split(',');
-            let tempLoc = inputSeed.parseTrameGGA(parts);
-
-            if (tempLoc != null) {
-                inputSeed.setLastLoc(tempLoc);
-            } else {
-                inputSeed.checkTrameMTK(parts);
-            }
-        }
-    }
-});
 
 //% color="#AA278D" icon="\uf279" weight=109
 namespace map {
